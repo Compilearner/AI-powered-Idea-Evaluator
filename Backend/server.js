@@ -1,17 +1,21 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./Config/db.js";
+import authRoutes from "./Routes/authRoutes.js";
+import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 //Middlware
+app.use(cookieParser());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Server is running!');
-});
+
+// Routes to server
+app.use("/api", authRoutes);
 
 // Connect to Database and Server
 app.listen(PORT, ()=>{
