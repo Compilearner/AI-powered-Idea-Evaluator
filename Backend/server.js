@@ -16,5 +16,5 @@ app.get('/', (req, res) => {
 // Connect to Database and Server
 app.listen(PORT, ()=>{
     connectDB();
-    console.log("Server started");
+    console.log("Server started at http://localhost:5000");
 });
