@@ -1,6 +1,6 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { connectDB } from "./Config/db.js";
 
 dotenv.config();
 const app = express();
@@ -15,5 +15,6 @@ app.get('/', (req, res) => {
 
 // Connect to Database and Server
 app.listen(PORT, ()=>{
+    connectDB();
     console.log("Server started");
 });
