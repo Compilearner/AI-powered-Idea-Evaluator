@@ -23,10 +23,10 @@ export const registerUser = async(req, res)=>{
         // secure: 
     });
 
-    return res.status(200).json({message:"User registered Successfully",newUser});
+    return res.status(200).json({success : true, message:"User registered Successfully",newUser});
     }catch(err){
         console.log(err);
-        return res.status(500).json({message:"Internal Server Error"});
+        return res.status(500).json({ success : false, message:"Internal Server Error"});
     }
 }
 
@@ -51,13 +51,13 @@ export const loginUser = async(req, res)=>{
     const token = jwt.sign({userId:user._id}, process.env.TOKEN_KEY, {expiresIn:"5h"});
     res.cookie("token", token, {
         httpOnly:true,
-        // secure: 
+        secure: process.env.NODE_ENV === "production" 
     });
 
-    return res.status(200).json({message:"User Login Successfully", user});
+    return res.status(200).json({success:true, message:"User Login Successfully", user});
     }catch(err){
         console.log(err);
-        return res.status(500).json({message:"Internal Server Error"});
+        return res.status(500).json({success:false, message:"Internal Server Error"});
     }
 }
 
@@ -69,3 +69,22 @@ export const logoutUser = async (req, res)=>{
 
     return res.status(200).json({success:true, message: "Logout Successfully"});
 }
+
+// Middleware to verify tokens for access any page 
+// Token from cookie
+export const verifyToken = async (req,res,next)=>{
+  const token = req.cookies.token;  
+  
+  if(!token){
+    return res.status(401).json({success:false, message:"Token Missing"});
+  }
+
+  try{
+     const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+     req.user = decoded;  // Actual User info hidden inside the token
+     next();
+  }catch(err){
+       return res.status(403).json({success:false, message:"Invalid or expired token"});
+  }
+
+} 

@@ -1,29 +1,32 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+
 
 const AuthPage = () => {
  const [newUser, setNewUser] = useState({userName:"", email:"", password:""})
  const [isRegister, setIsRegister] = useState(true);
-
  const navigate = useNavigate();
+
 
  const handleRegister = async (e)=>{
      e.preventDefault();
      try{
-        const res = await fetch("/api/registerUser",{
+        
+        const res = await fetch("/api/registerUser", {
             method:"POST",
-            headers: {
-                    'Content-Type': 'application/json',  
-                      },
-            credentials: 'include',
-            body: JSON.stringify(newUser)
-        });
+            headers : {"Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify(newUser),
+        })
         
         const data = await res.json();
-        console.log(data.newUser);
 
-        setNewUser({userName:"", email:"", password:""});
+        if(data.success){
+            setNewUser({userName:"", email:"", password:""});
+            navigate("/");
+        }
+
      }catch(err){
           console.log(err);
      }
@@ -32,43 +35,27 @@ const AuthPage = () => {
   const handleLogin = async (e)=>{
        e.preventDefault();
     try{
-        const res = await fetch("/api/loginUser",{
-            method:"POST",
-            headers: {
-                    'Content-Type': 'application/json',  
-                      },
-            credentials: 'include',          
-            body: JSON.stringify(newUser)
-        });
-        
-        const data = await res.json();
-        console.log(data);
+       
+       const res =  await fetch("/api/loginUser", {
+        method : "POST",
+        headers : {"Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(newUser),
 
-       setNewUser({ email:"", password:""});
+       })
+       
+       const data = await res.json();
+
+       if(data.success){
+        setNewUser({ email:"", password:""});
+            navigate("/");
+        }
+
      }catch(err){
           console.log(err);
      }
  }
 
- const handleLogout = async ()=>{
-    try{
-       const res = await fetch("/api/logoutUser", {
-        method:"POST",
-        headers: {
-                    'Content-Type': 'application/json',  
-                      },
-            credentials: 'include',
-    });
-
-    const data = await res.json();
-    
-    if(data.success){
-        navigate("/login-signup");
-    }
- }catch(err){
-        console.log(err);
-    }
-}  
 
     
 

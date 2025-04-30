@@ -5,7 +5,8 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./Authentication/**/*.{js,ts,jsx,tsx}", 
     "./Components/**/*.{js,ts,jsx,tsx}", 
-  ],
+    "./InputDashboard/**/*.{js,ts,jsx,tsx}", 
+  ],  
   theme: {
     extend: {},
   },

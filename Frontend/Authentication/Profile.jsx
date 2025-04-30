@@ -2,6 +2,6 @@
 
 export const Profile = () => {
   return (
-    <div>Profile</div>
+    <div></div>
   )
 }

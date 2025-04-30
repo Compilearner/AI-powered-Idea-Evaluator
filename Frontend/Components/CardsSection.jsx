@@ -3,7 +3,7 @@ import Card from "./Card"
 const cardDetails = [
   {
     title: "Idea Scoring System",
-    description: "Get a detailed score for your idea across key metrics like originality, feasibility, and impact.",
+    description: "Get a detailed score for your idea across key metrics like uniqueness, feasibility, impact, and skill.",
     src: "/Images/evaluatie-score.png",
     alt:"Evaluation Score meter",
   },
@@ -15,7 +15,7 @@ const cardDetails = [
   },
   {
     title: "Instant Suggestions",
-    description: "Receive AI-generated suggestions to refine and improve your idea.",
+    description: "Receive AI-generated suggestions to refine and start with your idea.",
     src: "/Images/suggestion.jpg",
     alt:"Suggestion picture",
   }

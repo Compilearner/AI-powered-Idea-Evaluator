@@ -12,7 +12,7 @@ const navItems = [
   },
   {
     item: "Get Started",
-    to: "/main",
+    to: "/playground",
   },
 ];
 

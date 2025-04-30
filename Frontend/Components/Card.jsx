@@ -10,7 +10,7 @@ const Card = ({item}) => {
    <img 
     src={item.src} 
     alt={item.alt}
-    className="w-full h-52 object-cover border border-gray-200 rounded-xl  relative z-10" 
+    className="w-[95%] h-[10rem] object-cover border border-gray-200 rounded-xl  relative z-10" 
   />
   
    <div className="text-center space-y-2 relative z-10">

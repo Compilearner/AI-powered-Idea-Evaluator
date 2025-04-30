@@ -4,9 +4,12 @@ import Navbar from "./Navbar"
 import UserButton from "./UserButton"
 import { Link } from "react-router-dom"
 
+
 const Home = () => {
+
+
   return (
-    <main>
+    <main >
         <Navbar/>
         <div className="w-full flex justify-around items-center my-[2rem] pr-4">
           <div className="flex flex-col w-[45%] pl-5">
