@@ -6,18 +6,15 @@ dotenv.config();
 const client = new Mistral({ apiKey: process.env.MIST_KEY });
 
 export const ideaEvaluation = async (req, res) => {
-  const { idea, purpose, skillLevel, userId } = req.body;
+
+  const { idea, purpose, skillLevel, userID } = req.body;
 
   if (!idea || !skillLevel || !purpose) {
     return res.status(400).json({ success: false, message: 'All fields are required' });
   }
-
-  if (!userId) {
-    return res.status(400).json({ success: false, message: 'UserId is invalid' });
-  }
-
-  const newIdea = new Idea({description: idea, userId: userId})
-  await newIdea.save();
+  
+  if(!userID)
+    return res.status(400).json({ success: false, message: 'UserID is missing'});
  
 const prompt = `
 You are an expert at evaluating startup or project ideas.
@@ -49,7 +46,6 @@ User's idea:
 "${idea}"
 `;
 
-
   
   try {
     const response = await client.chat.complete({
@@ -59,7 +55,14 @@ User's idea:
 
     const reply = response.choices[0]?.message?.content || 'No evaluation available.';
 
-    res.status(200).json({ evaluation: reply });
+    const newIdea = new Idea({
+    description: idea,
+    userId: userID
+   })  
+
+    await newIdea.save();
+
+    res.status(200).json({ evaluation : reply });
   } catch (error) {
     console.error(error.response?.data || error.message);
     res.status(500).json({ success: false, message: 'Failed to connect to Mistral API' });

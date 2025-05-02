@@ -11,6 +11,10 @@ export const registerUser = async(req, res)=>{
     try{
     const {userName, email, password} = req.body;
 
+    if(!userName || !email || !password){
+         return res.status(400).json({success : false, message:"All fileds are required"});
+    }
+
     // Create new User and saving its data to database
     const newUser = new User({userName, email, password});
     await newUser.save();

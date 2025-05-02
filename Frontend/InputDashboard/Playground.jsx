@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { useAuthStore } from '../Store/authStore';
 
 
 const Playground = () => {
@@ -8,7 +8,9 @@ const Playground = () => {
 const { register, handleSubmit } = useForm();
 const [isLoadingSpin, setIsLoadingSpin] = useState(false);
 const [isLoading, setIsLoading] = useState(false);
-const [response, setResponse] = useState("");
+const [response, setResponse] = useState(null);
+
+const {user } = useAuthStore((state) => state);
 
 const onSubmit = async (data) => {
     console.log('Form submitted:', data);
@@ -21,12 +23,16 @@ const onSubmit = async (data) => {
                     'Content-Type': 'application/json',  
                       },
             credentials: 'include',          
-            body: JSON.stringify(data)   
-        })
+            body: JSON.stringify({ ...data, userID: user._id })
+  
+        });
 
         const newData = await res.json();
-        console.log(newData.evaluation);
-        setIsLoadingSpin(false);
+        console.log(newData);
+
+        if(newData.evaluation){
+           setIsLoadingSpin(false);
+        }
         setResponse(newData.evaluation);
     }catch(err){
         console.log(err);
@@ -40,7 +46,10 @@ const onSubmit = async (data) => {
       {
         isLoading  && ( <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-opacity duration-500">
             {
-                isLoadingSpin ? (<div className="animate-spin h-8 w-8 border-4 border-white border-t-transparent rounded-full"></div>) :(<div className="text-center z-100 bg-white">{response}</div>)
+                isLoadingSpin ? (<div className="animate-spin h-8 w-8 border-4 border-white border-t-transparent rounded-full"></div>) 
+                :(<div className="text-center z-100 bg-white">
+                    {response}
+                </div>)
             } 
         </div>)
       }

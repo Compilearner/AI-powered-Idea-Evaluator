@@ -15,6 +15,6 @@ router.post("/autoCheck", verifyToken, (req,res)=>{
     return res.status(201).json({success:true, user:req.user});
 })
 
-router.post("/evaluate-idea", verifyToken, ideaEvaluation);
+router.post("/evaluate-idea", ideaEvaluation);
 
 export default router;

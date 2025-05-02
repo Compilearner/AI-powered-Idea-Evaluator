@@ -1,28 +1,33 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import {  FaChevronDown, FaChevronUp, FaPowerOff, FaUser } from "react-icons/fa"
 import { Link , useNavigate} from "react-router-dom";
+import { useAuthStore } from "../Store/authStore";
 
 
 
 const UserButton = () => {
-const currentUser = true;
+// const currentUser = true;
 
 const [isOpen , setIsOpen] = useState(false);
 const navigate = useNavigate();
+const { logout, user } = useAuthStore();
+const [userState, setUserState] = useState(user);
+
+useEffect(() => {
+    console.log(user);  // This will log the user state whenever it changes
+    setUserState(user);
+}, [user]);
 
 
 
 const handleLogout = async ()=>{
     try{
-    const res = await fetch("/api/logoutUser", {
-      method: "POST",
-      credentials : "include"
-    })
+    const res = await logout();
 
-    const data = await res.json();
-    console.log(data);
+    console.log(res);
+    console.log(user);
 
-    if(data.success){
+    if(res.success){
         navigate("/login-signup");
     }
     else{
@@ -33,7 +38,7 @@ const handleLogout = async ()=>{
     }
 }  
 
-  return currentUser ?(
+  return userState ?(
     <div className={`flex flex-col justify-center items-center gap-2 w-24 p-4 absolute right-10 top-4 `} onMouseEnter={() => setIsOpen(true)}  onMouseLeave={() => setIsOpen(false)}>
       <button className="flex justify-center items-center gap-2">
           <span className=""><FaUser className="text-white bg-black size-8 border rounded-full p-1 border-gray-300"/></span>

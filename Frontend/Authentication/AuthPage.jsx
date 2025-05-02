@@ -1,6 +1,7 @@
 import {  useState } from "react";
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../Store/authStore";
 
 
 const AuthPage = () => {
@@ -8,21 +9,16 @@ const AuthPage = () => {
  const [isRegister, setIsRegister] = useState(true);
  const navigate = useNavigate();
 
+ const {login, register } = useAuthStore((state) => state);
+
 
  const handleRegister = async (e)=>{
      e.preventDefault();
      try{
         
-        const res = await fetch("/api/registerUser", {
-            method:"POST",
-            headers : {"Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify(newUser),
-        })
-        
-        const data = await res.json();
+        const res = await register(newUser);
 
-        if(data.success){
+        if(res.success){
             setNewUser({userName:"", email:"", password:""});
             navigate("/");
         }
@@ -36,17 +32,10 @@ const AuthPage = () => {
        e.preventDefault();
     try{
        
-       const res =  await fetch("/api/loginUser", {
-        method : "POST",
-        headers : {"Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(newUser),
-
-       })
+       const res =  await login(newUser);
+       console.log(res);
        
-       const data = await res.json();
-
-       if(data.success){
+       if(res.success){
         setNewUser({ email:"", password:""});
             navigate("/");
         }
