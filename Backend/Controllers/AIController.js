@@ -53,7 +53,10 @@ User's idea:
       messages: [{ role: 'user', content: prompt }],
     });
 
-    const reply = response.choices[0]?.message?.content || 'No evaluation available.';
+    const rawReply = response.choices[0]?.message?.content || 'No evaluation available.';
+    const cleanedReply = rawReply.replace(/```json|```/g, '').trim();
+    let parsedReply = {};
+    parsedReply = JSON.parse(cleanedReply);
 
     const newIdea = new Idea({
     description: idea,
@@ -62,11 +65,31 @@ User's idea:
 
     await newIdea.save();
 
-    res.status(200).json({ evaluation : reply });
+    res.status(200).json({ evaluation : parsedReply });
   } catch (error) {
     console.error(error.response?.data || error.message);
     res.status(500).json({ success: false, message: 'Failed to connect to Mistral API' });
   }
 };
+
+
+export const getIdeas = async(req, res)=>{
+     try{
+          const {userID} = req.body;
+
+          if(!userID)
+             return res.status(400).json({ success: false, message: 'UserID is missing'});
+
+          const ideas = await Idea.find({userId : userID}).lean();
+
+          if(!ideas)
+              return res.status(500).json({ success: false, message: 'Internal server error'});
+
+          return res.status(201).json({ success: true, message: 'All ideas fetched successfully', ideas});
+
+     }catch(err){
+        console.log(err);
+     }
+}
 
 

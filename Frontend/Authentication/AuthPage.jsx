@@ -10,17 +10,41 @@ const AuthPage = () => {
  const navigate = useNavigate();
 
  const {login, register } = useAuthStore((state) => state);
+ const [errors, setErrors] = useState({});
+
+ const validate = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
+
+    if (!emailRegex.test(newUser.email)) {
+      newErrors.email = 'Invalid email format';
+    }
+
+    if (!passwordRegex.test(newUser.password)) {
+      newErrors.password = 'Password must be at least 6 characters and include a number';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
 
  const handleRegister = async (e)=>{
      e.preventDefault();
      try{
         
-        const res = await register(newUser);
+        const result = validate();
+
+        if(result){
+             const res = await register(newUser);
 
         if(res.success){
             setNewUser({userName:"", email:"", password:""});
             navigate("/");
+        }
+        }else{
+          return;
         }
 
      }catch(err){
@@ -31,13 +55,21 @@ const AuthPage = () => {
   const handleLogin = async (e)=>{
        e.preventDefault();
     try{
+
+        const result = validate();
+        console.log(result);
+        console.log(errors);
+
+        if(result){
+            const res =  await login(newUser);
+            console.log(res);
        
-       const res =  await login(newUser);
-       console.log(res);
-       
-       if(res.success){
-        setNewUser({ email:"", password:""});
-            navigate("/");
+            if(res.success){
+             setNewUser({ email:"", password:""});
+             navigate("/");
+        }
+        }else{
+            return;
         }
 
      }catch(err){
@@ -65,13 +97,19 @@ const AuthPage = () => {
                     <span className="bg-gray-100 p-[.6rem]"><FaUser  className="text-gray-400 text-lg"/></span>
                     <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none" type="text" placeholder="Username" value={newUser.userName} onChange={(e)=>setNewUser({...newUser, userName: e.target.value})}/>
                 </div>
-                <div className="flex w-full justify-center items-center">
-                   <span className="bg-gray-100 p-[.6rem]"><FaEnvelope  className="text-gray-400 text-lg"/></span>
-                    <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="email" placeholder="Email" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value})}/>
+                <div className="w-full flex flex-col gap-3">
+                    <div className="flex w-full justify-center items-center">
+                      <span className="bg-gray-100 p-[.6rem]"><FaEnvelope  className="text-gray-400 text-lg"/></span>
+                      <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="email" placeholder="Email" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value})}/>
                 </div>
+                  {errors.email && <p className="text-[.8rem] text-red-400 text-center">{errors.email}</p>}
+                </div>
+                <div className="w-full flex flex-col gap-3">
                 <div className="flex w-full justify-center items-center">
                     <span className="bg-gray-100 p-[.6rem]"><FaLock  className="text-gray-400 text-lg"/></span>
                     <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="password" placeholder="Password" value={newUser.password} onChange={(e)=>setNewUser({...newUser, password: e.target.value})}/>
+                </div>
+                 {errors.password && <p className="text-[.8rem] text-red-400 text-center">{errors.password}</p>}
                 </div>
                 <div className="flex justify-center items-center gap-2 text-white mt-[-1.3rem]">
                     <h2>Already have an account?</h2>
@@ -81,13 +119,19 @@ const AuthPage = () => {
                 </form> )    
                : (
              <form className="w-full flex flex-col justify-center items-center gap-[1.5rem] overflow-hidden p-[1rem]">
-                 <div className="flex w-full justify-center items-center">
-                   <span className="bg-gray-100 p-[.6rem]"><FaEnvelope  className="text-gray-400 text-lg"/></span>
-                    <input className="bg-gray-300 pl-[.4rem]  text-lg w-[70%] h-full focus:outline-none"  type="email" placeholder="Email" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value})}/>
+                 <div className="w-full flex flex-col gap-3">
+                    <div className="flex w-full justify-center items-center">
+                      <span className="bg-gray-100 p-[.6rem]"><FaEnvelope  className="text-gray-400 text-lg"/></span>
+                      <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="email" placeholder="Email" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value})}/>
                 </div>
+                  {errors.email && <p className="text-red-400 w-full text-center text-[.8rem]" >{errors.email}</p>}
+                </div>
+                <div className="w-full flex flex-col gap-3">
                 <div className="flex w-full justify-center items-center">
                     <span className="bg-gray-100 p-[.6rem]"><FaLock  className="text-gray-400 text-lg"/></span>
-                    <input className="bg-gray-300 pl-[.4rem]  text-lg w-[70%] h-full focus:outline-none"  type="password" placeholder="Password" value={newUser.password} onChange={(e)=>setNewUser({...newUser, password: e.target.value})}/>
+                    <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="password" placeholder="Password" value={newUser.password} onChange={(e)=>setNewUser({...newUser, password: e.target.value})}/>
+                </div>
+                 {errors.password && <p className="text-red-400 text-center text-[.8rem]">{errors.password}</p>}
                 </div>
                 <button className="px-[1rem] py-[.4rem] text-lg font-semibold bg-gray-300 w-[40%] h-[2.5rem] hover:bg-gray-500"  onClick={handleLogin}>Login</button>  
             </form>

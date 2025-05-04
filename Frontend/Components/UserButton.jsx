@@ -39,7 +39,7 @@ const handleLogout = async ()=>{
 }  
 
   return userState ?(
-    <div className={`flex flex-col justify-center items-center gap-2 w-24 p-4 absolute right-10 top-4 `} onMouseEnter={() => setIsOpen(true)}  onMouseLeave={() => setIsOpen(false)}>
+    <div className={`flex flex-col justify-center items-center gap-2 w-24 p-4 absolute right-10 top-4 `} onClick={() => setIsOpen(true)} onMouseEnter={() => setIsOpen(true)}  onMouseLeave={() => setIsOpen(false)}>
       <button className="flex justify-center items-center gap-2">
           <span className=""><FaUser className="text-white bg-black size-8 border rounded-full p-1 border-gray-300"/></span>
           <span >
@@ -49,7 +49,7 @@ const handleLogout = async ()=>{
       </button>
        {
         isOpen && (
-          <div className="flex flex-col justify-center items-center gap-4 w-32 h-24 bg-white p-5 shadow-lg rounded-md">
+          <div className="flex flex-col justify-center items-center gap-4 w-32 h-24 bg-white p-5 shadow-lg rounded-md ">
            <Link to={"/profile"}>
               <div className="flex justify-center items-center gap-2">
               <span><FaUser className="text-white bg-black size-6 border rounded-full p-1 border-gray-300"/></span>
