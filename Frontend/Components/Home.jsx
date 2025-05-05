@@ -1,14 +1,16 @@
 import CardsSection from "./CardsSection"
 import Footer from "./Footer"
-import Navbar from "./Navbar"
-import UserButton from "./UserButton"
 import { Link } from "react-router-dom"
 import { useAuthStore } from "../Store/authStore"
+
+
+
 
 const Home = () => {
 const {user} = useAuthStore((state)=>state);
 
   return (
+  
     <main className="relative" >
     
         <div className="w-full flex justify-around items-center my-[2rem] pr-4">
@@ -29,6 +31,7 @@ const {user} = useAuthStore((state)=>state);
         <CardsSection/>
         <Footer/>
     </main>
+    
   )
 }
 

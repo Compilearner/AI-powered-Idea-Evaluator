@@ -6,6 +6,9 @@ import { Profile } from '../Authentication/Profile';
 import Playground from '../InputDashboard/Playground';
 import { useAuthStore } from '../Store/authStore';
 import Navbar from '../Components/Navbar';
+import {AnimatePresence} from 'framer-motion';
+
+
 
 const App = () => {
  const location = useLocation(); 
@@ -26,6 +29,7 @@ const showNavbar = location.pathname !== "/login-signup";
   return (
     <>
     { showNavbar && <Navbar/>}
+    <AnimatePresence mode="wait">
     <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/Navbar' element={<Navbar/>}/>
@@ -33,6 +37,7 @@ const showNavbar = location.pathname !== "/login-signup";
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/playground' element={<Playground/>}/>
     </Routes>
+    </AnimatePresence>
     </>
   )
 }

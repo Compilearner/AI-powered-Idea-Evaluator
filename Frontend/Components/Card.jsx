@@ -2,7 +2,7 @@ import React from 'react'
 
 const Card = ({item}) => {
   return (
-<div className="relative w-[25vw] h-[55vh] bg-white rounded-[3rem] flex flex-col items-center p-4 space-y-4 overflow-hidden">
+<div className="relative w-[25vw] h-[55vh] bg-white rounded-[3rem] flex flex-col items-center p-4 space-y-4 overflow-hidden  group hover:translate-x-2 hover:translate-y-2 transition-all duration-200 ease-in-out" >
   {/* Gradient Overlay */}
    <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/40 to-transparent z-0 rounded-b-[3rem]" />
 

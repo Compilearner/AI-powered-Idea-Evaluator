@@ -23,9 +23,9 @@ const cardDetails = [
 
 const CardsSection = () => {
   return (
-  <section className="h-screen bg-black pt-[1rem]">
-      <h2 className="text-5xl text-white text-center libre-baskerville-bold">IDEA-TEST-BUILD</h2>
-       <div className="pt-[5rem] flex justify-center items-center gap-3 ">
+  <section className="h-screen bg-black pt-[1rem] relative">
+      <h2 className="text-5xl text-white text-center libre-baskerville-bold sticky top-6">IDEA-TEST-BUILD</h2>
+       <div className="pt-[5rem] flex justify-center items-center gap-8 ">
       {
         cardDetails.map((item, index) => {
           return (

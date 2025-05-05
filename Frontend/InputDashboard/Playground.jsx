@@ -107,17 +107,6 @@ const onSubmit = async (data) => {
 
             </div>   
 
-               {/* * Programming Languages
-               <div>
-                   <label>Skill level</label>
-                   <div>
-                      {['JavaScript', 'Python', 'Java', 'C++', 'C#','Go', 'Rust', 'PHP', 'Ruby', 'TypeScript', 'Kotlin', 'Swift'].map((lang) => (
-                     <label key={lang} className="block">
-                      <input type="checkbox" value={lang} {...register('languages')}  /> {lang}</label>
-                     ))}
-                   </div>
-               </div> */}
-
                {/** Submit Button */}
                <div className='flex justify-center items-center gap-6'>
                   <button type='button' onClick={handleReset} className='text-xl w-[25%] h-11 rounded-md px-2 bg-black text-white libre-baskerville-bold hover:bg-gray-400 transition-all ease-in-out duration-300 '>Reset Input</button>
