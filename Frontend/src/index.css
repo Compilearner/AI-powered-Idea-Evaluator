@@ -19,3 +19,11 @@
   font-weight: 400;
   font-style: italic;
 }
+
+@layer utilities{
+
+  .floating-nav {
+      @apply bg-white rounded-lg border;
+    }
+
+}
