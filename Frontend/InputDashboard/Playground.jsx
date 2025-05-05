@@ -121,7 +121,7 @@ const onSubmit = async (data) => {
                {/** Submit Button */}
                <div className='flex justify-center items-center gap-6'>
                   <button type='button' onClick={handleReset} className='text-xl w-[25%] h-11 rounded-md px-2 bg-black text-white libre-baskerville-bold hover:bg-gray-400 transition-all ease-in-out duration-300 '>Reset Input</button>
-                  <button type='submit' className='text-xl w-[25%] h-11 rounded-md px-2 bg-black text-white libre-baskerville-bold hover:bg-gray-400 transition-all ease-in-out duration-300 '>Evaluate Idea</button>
+                  <button type='submit' className='text-xl w-[25%] h-11 rounded-md px-2 bg-green-700 text-white libre-baskerville-bold hover:bg-gray-400 transition-all ease-in-out duration-300 '>Evaluate Idea</button>
                </div>
         </form>
     </div>

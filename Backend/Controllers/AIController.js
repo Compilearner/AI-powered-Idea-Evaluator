@@ -15,9 +15,25 @@ export const ideaEvaluation = async (req, res) => {
   
   if(!userID)
     return res.status(400).json({ success: false, message: 'UserID is missing'});
+
+  let reply = ""; 
  
 const prompt = `
-You are an expert at evaluating startup or project ideas.
+You are an expert at evaluating startup or project ideas, product inventions and similar proposals.
+If the user input is not an idea--if it is general question, factual query or anything not resembling an idea or lead to product---respond with: "Sorry, I can only evaluate ideas or similar inventions, not other tyoes of input."
+for example-: 
+(1) User's idea: What is Dijkstra's algorithm?
+    AI : Sorry, I can only evaluate ideas or inventions, not other types of input. 
+
+(2) User's idea: You know , what I did today in my school?
+    AI : Sorry, I can only evaluate ideas or inventions, not other types of input. 
+
+(3) User's idea: A mobile app that connects volunteers with nearby NGOs.
+    AI: That's a thoughtful idea. Evaluation starts.....
+
+(4) User's idea: I have an thought to work on building a AI enhanced robot to help in my errands daily.
+    AI : That's a thoughtful idea. Evaluation starts..... 
+
 
 Evaluate the user's idea and provide a concise, helpful response tailored to them. Use the following private evaluation criteria (do NOT mention these in the output):
 
@@ -34,13 +50,18 @@ Evaluate the user's idea and provide a concise, helpful response tailored to the
 
 Respond ONLY in the following JSON format:
 
-{
+ if(idea is not a valid input)
+    ${reply} = "Sorry, I can only evaluate ideas or similar inventions, not other tyoes of input."
+else{
+   {
   "techSuggestions": "Basic tech suggestions (if skill level is 'No knowledge') or null",
   "uniquenessImpact": "Short comment on idea uniqueness and impact or null",
   "evaluationSummary": "2-3 sentence summary of the evaluation",
   "score": number (0 to 10),
   "recommendation": "Short recommendation or null"
+ }
 }
+
 
 User's idea:
 "${idea}"
@@ -48,7 +69,8 @@ User's idea:
 
   
   try {
-    const response = await client.chat.complete({
+    if(!reply){
+      const response = await client.chat.complete({
       model: "mistral-small-latest",
       messages: [{ role: 'user', content: prompt }],
     });
@@ -64,8 +86,10 @@ User's idea:
    })  
 
     await newIdea.save();
+  }
 
-    res.status(200).json({ evaluation : parsedReply });
+
+    res.status(200).json({ evaluation : parsedReply || reply });
   } catch (error) {
     console.error(error.response?.data || error.message);
     res.status(500).json({ success: false, message: 'Failed to connect to Mistral API' });

@@ -2,6 +2,7 @@ import {  useState } from "react";
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../Store/authStore";
+import toast from "react-hot-toast";
 
 
 const AuthPage = () => {
@@ -22,7 +23,7 @@ const AuthPage = () => {
     }
 
     if (!passwordRegex.test(newUser.password)) {
-      newErrors.password = 'Password must be at least 6 characters and include a number';
+      newErrors.password = 'Password must be at least 6 characters and includes a digit';
     }
 
     setErrors(newErrors);
@@ -37,13 +38,21 @@ const AuthPage = () => {
         const result = validate();
 
         if(result){
-             const res = await register(newUser);
 
-        if(res.success){
-            setNewUser({userName:"", email:"", password:""});
-            navigate("/");
-        }
+          const res = await register(newUser);
+          if(res.success){
+             toast.success(res.message);
+             setNewUser({userName:"", email:"", password:""});
+
+             {/** TAKE SOME TIME TO SHOW UP FOR TOAST BEFORE NAVIGATING */}
+             setTimeout(()=>{
+                navigate("/");
+             },2000);
+
         }else{
+          toast.error(res.message);
+        }
+      }else{
           return;
         }
 
@@ -65,9 +74,17 @@ const AuthPage = () => {
             console.log(res);
        
             if(res.success){
+              toast.success(res.message);
              setNewUser({ email:"", password:""});
-             navigate("/");
+
+             {/** TAKE SOME TIME TO SHOW UP FOR TOAST BEFORE NAVIGATING */}
+             setTimeout(()=>{
+                navigate("/");
+             },2000);
+        }else{
+          toast.error(res.message);
         }
+
         }else{
             return;
         }

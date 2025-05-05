@@ -2,7 +2,7 @@ import { useState , useEffect} from "react";
 import {  FaChevronDown, FaChevronUp, FaPowerOff, FaUser } from "react-icons/fa"
 import { Link , useNavigate} from "react-router-dom";
 import { useAuthStore } from "../Store/authStore";
-
+import {toast} from "react-hot-toast"
 
 
 const UserButton = () => {
@@ -28,11 +28,17 @@ const handleLogout = async ()=>{
     console.log(user);
 
     if(res.success){
-        navigate("/login-signup");
-    }
-    else{
-      console.log("Logout Failed");
-    }
+        toast.success(res.message);
+    
+          {/** TAKE SOME TIME TO SHOW UP FOR TOAST BEFORE NAVIGATING */}
+          setTimeout(()=>{
+          navigate("/");
+        },2000);
+        
+        }else{
+          toast.error(res.message);
+      }
+
  }catch(err){
         console.log(err);
     }
@@ -49,7 +55,7 @@ const handleLogout = async ()=>{
       </button>
        {
         isOpen && (
-          <div className="flex flex-col justify-center items-center gap-4 w-32 h-24 bg-white p-5 shadow-lg rounded-md ">
+          <div className="flex flex-col justify-center items-center gap-4 w-32 h-24 bg-white p-5 shadow-lg rounded-md absolute z-50 top-14">
            <Link to={"/profile"}>
               <div className="flex justify-center items-center gap-2">
               <span><FaUser className="text-white bg-black size-6 border rounded-full p-1 border-gray-300"/></span>
