@@ -1,6 +1,7 @@
 import { Mistral } from '@mistralai/mistralai';
 import dotenv from 'dotenv';
 import Idea from '../Models/ideaSchema.js';
+import mongoose from 'mongoose';
 dotenv.config();
 
 const client = new Mistral({ apiKey: process.env.MIST_KEY });
@@ -130,6 +131,25 @@ export const getIdeas = async(req, res)=>{
      }catch(err){
         console.log(err);
      }
+}
+
+
+export const deleteIdea = async (req, res)=>{
+     const {id} = req.params;
+
+      // Handle invalid Product ID
+    if (!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({success: false , message:" Invalid Idea ID"}); 
+    }
+
+    try{
+      await Idea.findByIdAndDelete(id);
+      res.status(200).json({success:true, message: "Idea was deleted successfully"});
+
+    }catch(err){
+      console.log(err);
+      res.status(500).json({success: false , message:"Server Error"});
+    }
 }
 
 

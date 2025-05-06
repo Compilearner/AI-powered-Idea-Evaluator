@@ -134,6 +134,26 @@ export const useAuthStore = create(
                  }catch(err){
                     console.log(err);
                  }
+            },
+
+            deleteIdea : async (ideaId)=>{
+                try{
+                    const res = await fetch(`/api/deleteIdea/${ideaId}`,{
+                        method : "DELETE",
+                        credentials : "include",
+                    });
+
+                    const data = await res.json();
+                    
+                    if(!data.success) return {success: false, message: data.message};
+
+                    set((state)=> ({ideas : state.ideas.filter((idea)=> idea._id !== ideaId)}));
+
+                    return {success: true, message: data.message};
+
+                }catch(err){
+                    console.log(err);
+                }
             }
 
         }),

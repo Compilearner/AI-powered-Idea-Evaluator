@@ -1,6 +1,6 @@
 import express from "express";
 import { loginUser, logoutUser, registerUser, verifyToken } from "../Controllers/authControllers.js";
-import { getIdeas, ideaEvaluation } from "../Controllers/AIController.js";
+import { deleteIdea, getIdeas, ideaEvaluation } from "../Controllers/AIController.js";
 
 
 const router = express.Router();
@@ -18,5 +18,7 @@ router.post("/autoCheck", verifyToken, (req,res)=>{
 router.post("/evaluate-idea", ideaEvaluation);
 
 router.post("/fetchIdeas", getIdeas);
+
+router.delete("/deleteIdea/:id", deleteIdea);
 
 export default router;
