@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../Store/authStore';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,8 @@ const { register, handleSubmit, reset } = useForm();
 const [isLoadingSpin, setIsLoadingSpin] = useState(false);
 const [isLoading, setIsLoading] = useState(false);
 const [response, setResponse] = useState({});
+const [error, setError] = useState(false);
+
 
 const {user, token } = useAuthStore((state) => state);
 
@@ -18,7 +20,8 @@ const onSubmit = async (data) => {
     console.log('Form submitted:', data);
     setIsLoading(true);
     setIsLoadingSpin(true);
-    console.log(user);
+
+
     try{
         const res = await fetch("/api/evaluate-idea", {
             method : "POST",  
@@ -30,16 +33,23 @@ const onSubmit = async (data) => {
   
         });
 
+        if(!res.ok){
+           throw new Error('Server Error');
+        }
+
         const newData = await res.json();
     
         console.log(newData.evaluation);
 
         if(newData.evaluation){
            setIsLoadingSpin(false);
+            setResponse(newData.evaluation);
         }
-        setResponse(newData.evaluation);
+
     }catch(err){
         console.log(err);
+        setIsLoadingSpin(false);
+        setError(true);
     }
   };
 
@@ -52,20 +62,21 @@ const onSubmit = async (data) => {
   }
 
 
+
   if(!token){
        navigate("/login-signup");
   }
 
 
   return (
-    <div className=" w-full  mx-auto flex flex-col justify-center gap-8 bg-black items-center relative py-12  mt-7 ">
+    <div className={` w-full h-screen mx-auto flex flex-col justify-center gap-8 bg-black items-center relative py-12  mt-7  `}>
         <h2 className='text-4xl text center libre-baskerville-bold text-white'>Let's Test The Idea</h2>
       {/*** Modal window */}
       {
         isLoading  && ( <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-opacity duration-500">
             {
                 isLoadingSpin ? (<div className="animate-spin h-8 w-8 border-4 border-white border-t-transparent rounded-full"></div>) 
-                :(<EvaluationOutput output = {response}  setIsLoading={setIsLoading}  setResponse={setResponse}/>)
+                :(<EvaluationOutput output = {response}  setIsLoading={setIsLoading}  setResponse={setResponse} error={error} setError={setError} />)
             } 
         </div>)
       }

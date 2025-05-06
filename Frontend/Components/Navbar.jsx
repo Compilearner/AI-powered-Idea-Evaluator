@@ -58,7 +58,7 @@ useEffect(()=>{
 
 
   return (
-    <nav className="flex w-full h-20 justify-around items-center fixed inset-x-0 border-none top-2 z-50" ref={navRef}>
+    <nav className="flex w-full h-20 justify-around items-center fixed inset-x-0 border-none top-2 z-50 bg-white" ref={navRef}>
       <div className="flex justify-center items-center gap-9 w-2/3 h-12 rounded-2xl p-6 border border-gray-500">
         {navItems.map((Item, index) => (
           <Link key={index} to={Item.to} className="mx-2 text-lg font-semibold libre-baskerville-bold hover:underline decoration-slate-400 underline-offset-4">

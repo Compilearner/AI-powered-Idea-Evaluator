@@ -20,55 +20,71 @@ export const ideaEvaluation = async (req, res) => {
  
 const prompt = `
 You are an expert at evaluating startup or project ideas, product inventions and similar proposals.
-If the user input is not an idea--if it is general question, factual query or anything not resembling an idea or lead to product---respond with: "Sorry, I can only evaluate ideas or similar inventions, not other tyoes of input."
-for example-: 
-(1) User's idea: What is Dijkstra's algorithm?
-    AI : Sorry, I can only evaluate ideas or inventions, not other types of input. 
 
-(2) User's idea: You know , what I did today in my school?
-    AI : Sorry, I can only evaluate ideas or inventions, not other types of input. 
+If the user input is not an idea--if it is a general question, factual query or anything not resembling an idea or leading to a product---respond with:
+"Sorry, I can only evaluate ideas or similar inventions, not other types of input."
+
+For example:
+(1) User's idea: What is Dijkstra's algorithm?
+    AI: Sorry, I can only evaluate ideas or inventions, not other types of input.
+
+(2) User's idea: You know, what I did today in my school?
+    AI: Sorry, I can only evaluate ideas or inventions, not other types of input.
 
 (3) User's idea: A mobile app that connects volunteers with nearby NGOs.
-    AI: That's a thoughtful idea. Evaluation starts.....
+    AI: That's a thoughtful idea. Evaluation starts...
 
-(4) User's idea: I have an thought to work on building a AI enhanced robot to help in my errands daily.
-    AI : That's a thoughtful idea. Evaluation starts..... 
+(4) User's idea: I have a thought to work on building an AI-enhanced robot to help in my errands daily.
+    AI: That's a thoughtful idea. Evaluation starts...
 
+Evaluate the user's idea and provide a concise, helpful response (friendly tone) tailored to them. Use the following private evaluation criteria (do NOT mention these in the output):
 
-Evaluate the user's idea and provide a concise, helpful response tailored to them. Use the following private evaluation criteria (do NOT mention these in the output):
+1. Mark the rating based on the user's skill level: "${skillLevel}".
+   - Output response could be changed based on skill and purpose, so dynamically handle those situations.
 
-1. Analyze the user's skill level: "${skillLevel}".
-   - If skill level is "No knowledge", suggest basic technologies to start with, based on the idea.
-   - You can give suggestion or advice to user, if the idea is already existing and building it from scratch will be a waste of time like building chatgpt again.
-2. Consider the user's purpose: "${purpose}".
+2. Consider the user's purpose for evaluation: "${purpose}".
    - Adapt your response based on the purpose (e.g., learning, resume, hackathon).
+
 3. Assess the uniqueness and real-world impact of the idea.
-   - If the idea is truly unique or impactful, mention that briefly.
-4. Give a final evaluation summary in 2–3 sentences.
-5. Provide a score out of 10.
-6. Only if the score is above 6, give a recommendation to start working on the idea.
+   - If the idea is unique, moderately unique, common, or impactful, mention that briefly.
+
+4. Provide answers to these internal guiding questions to shape the response (do NOT show them to the user):
+   - Does it solve a real problem or is it just minimal?
+   - Is this a good project to work on for their stage?
+   - Is it good for their resume?
+   - How could this be built or approached technically?
+
+5. Give a final evaluation summary in 4 sentences.
+
+6. Provide a score out of 10 (based on idea quality, skill level, impact, user's purpose, and feasibility).
+
+7. If the score is above 6, motivate the user positively to pursue the idea.
 
 Respond ONLY in the following JSON format:
 
- if(idea is not a valid input)
-    ${reply} = "Sorry, I can only evaluate ideas or similar inventions, not other tyoes of input."
-else{
-   {
-  "techSuggestions": "Basic tech suggestions (if skill level is 'No knowledge') or null",
-  "uniquenessImpact": "Short comment on idea uniqueness and impact or null",
-  "evaluationSummary": "2-3 sentence summary of the evaluation",
-  "score": number (0 to 10),
-  "recommendation": "Short recommendation or null"
- }
+if(idea is not a valid input)
+  ${reply} = "Sorry, I can only evaluate ideas or similar inventions, not other types of input."
+else {
+  {
+    "summary": "...",
+    "technicalSuggestion": "...",
+    "realWorldImpact": "...",
+    "resumeValue": "...",
+    "score": 8,
+    "motivation": "This sounds promising! You should definitely start working on it."
+  }
 }
-
 
 User's idea:
 "${idea}"
 `;
 
+
+
   
   try {
+   let parsedReply = {};
+
     if(!reply){
       const response = await client.chat.complete({
       model: "mistral-small-latest",
@@ -77,7 +93,7 @@ User's idea:
 
     const rawReply = response.choices[0]?.message?.content || 'No evaluation available.';
     const cleanedReply = rawReply.replace(/```json|```/g, '').trim();
-    let parsedReply = {};
+    
     parsedReply = JSON.parse(cleanedReply);
 
     const newIdea = new Idea({
@@ -92,7 +108,7 @@ User's idea:
     res.status(200).json({ evaluation : parsedReply || reply });
   } catch (error) {
     console.error(error.response?.data || error.message);
-    res.status(500).json({ success: false, message: 'Failed to connect to Mistral API' });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
