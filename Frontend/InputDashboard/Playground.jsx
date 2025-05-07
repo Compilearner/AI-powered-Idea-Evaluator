@@ -86,7 +86,7 @@ const onSubmit = async (data) => {
               {/** Idea Description */}
               <div className='w-full  shadow-md shadow-gray-400 rounded-md'>
                   {/* <label className='text-2xl libre-baskerville-bold ' >Idea Description</label> */}
-                  <textarea className=' w-full rounded-md px-3 py-2 text-xl focus:outline-none libre-baskerville-regular ' {...register('idea',{required:true})} placeholder='Describe your idea....' rows={4}/>
+                  <textarea className=' w-full rounded-md px-3 py-2 text-xl focus:outline-none libre-baskerville-regular ' {...register('idea',{required:true})} placeholder='Describe your idea....' rows={4} required/>
               </div>
 
               <div className='w-full flex justify-around items-center'>
@@ -94,7 +94,7 @@ const onSubmit = async (data) => {
               {/** Purpose */}
               <div className=' w-5/12 flex flex-col justify-center'>
                      {/* <label className='text-2xl libre-baskerville-bold '>Purpose to work on idea</label> */}
-                   <select className='rounded-md p-4 focus:outline-none shadow-md shadow-gray-400 '  {...register('purpose', { required: true })} >
+                   <select className='rounded-md p-4 focus:outline-none shadow-md shadow-gray-400 '  {...register('purpose', { required: true })}  required>
                         <option value="" className='text-gray-400 libre-baskerville-bold'>-- Select Purpose to work on idea--</option>
                         <option value="Learning">Learning</option>
                         <option value="Hackathon Project">Hackathon Project</option>
@@ -107,7 +107,7 @@ const onSubmit = async (data) => {
               {/** Skill level */}
                <div className=' w-5/12 flex justify-start items-center gap-9 '>
                    {/* <label className='text-2xl libre-baskerville-bold '>Skill level</label> */}
-                   <select className='rounded-md p-4 focus:outline-none w-full shadow-md shadow-gray-400 '  {...register('skillLevel', { required: true })} >
+                   <select className='rounded-md p-4 focus:outline-none w-full shadow-md shadow-gray-400 '  {...register('skillLevel', { required: true })} required>
                         <option value="">-- Select Skill Level --</option>
                         <option value="No knowledge">No knowledge</option>
                         <option value="Beginner">Beginner</option>
