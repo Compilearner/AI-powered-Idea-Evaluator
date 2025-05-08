@@ -1,5 +1,5 @@
 import express from "express";
-import { loginUser, logoutUser, registerUser, verifyToken } from "../Controllers/authControllers.js";
+import { feedback, loginUser, logoutUser, registerUser, verifyToken } from "../Controllers/authControllers.js";
 import { deleteIdea, getIdeas, ideaEvaluation } from "../Controllers/AIController.js";
 
 
@@ -20,5 +20,7 @@ router.post("/evaluate-idea", ideaEvaluation);
 router.post("/fetchIdeas", getIdeas);
 
 router.delete("/deleteIdea/:id", deleteIdea);
+
+router.post("/feed", feedback);
 
 export default router;

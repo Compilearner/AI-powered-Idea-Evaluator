@@ -7,6 +7,7 @@ import Playground from '../InputDashboard/Playground';
 import { useAuthStore } from '../Store/authStore';
 import Navbar from '../Components/Navbar';
 import {AnimatePresence} from 'framer-motion';
+import Feedback from '../Components/Feedback';
 
 
 
@@ -36,6 +37,7 @@ const showNavbar = location.pathname !== "/login-signup";
         <Route path='/login-signup' element={<AuthPage/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/playground' element={<Playground/>}/>
+        <Route path='/feedback' element={<Feedback/>}/>
     </Routes>
     </AnimatePresence>
     </>

@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import cookieParser from 'cookie-parser';
+import Feed from "../Models/feedSchema.js";
 
 
 dotenv.config();
@@ -92,3 +93,23 @@ export const verifyToken = async (req,res,next)=>{
   }
 
 } 
+
+
+export const feedback = async (req, res)=>{
+   try{
+       const {main, suggestion} = req.body;
+
+       if(!main)
+          return res.status(400).json({success: false, message:"Main field is required"});
+
+       const feed = new Feed({main, suggestion});
+       await feed.save();
+       console.log(feed);
+
+       res.status(200).json({success: true, message:"Feedback Submitted, Thankyouu!!"});
+   }catch(err){
+    console.log(err);
+    res.status(500).json({success: false, message:"Internal server error"});
+   }
+
+}

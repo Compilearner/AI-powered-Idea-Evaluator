@@ -154,6 +154,29 @@ export const useAuthStore = create(
                 }catch(err){
                     console.log(err);
                 }
+            },
+
+            feed : async(feedData)=>{
+                try{
+                    const res = await fetch("/api/feed", {
+                        method: "POST",
+                        credentials:"include",
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        },
+                        body: JSON.stringify(feedData)
+                    });
+
+                    const data = await res.json();
+
+                    if(!data.success)
+                        return {success:false , message:data.message};
+
+                    return {success:true , message:data.message}
+
+                }catch(err){
+                     console.log(err);
+                }
             }
 
         }),

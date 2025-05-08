@@ -33,7 +33,7 @@ const handleDeleteIdea = async(ideaId)=>{
 }
 
 useEffect(()=>{
-        fetchIdeas(user.userId);
+        fetchIdeas(user.userId || user._id);
         console.log(ideas);
    },[fetchIdeas]);
 
