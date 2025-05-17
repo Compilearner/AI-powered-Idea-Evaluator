@@ -4,7 +4,7 @@ import { useAuthStore } from "../Store/authStore";
 import { useRef, useState, useEffect } from "react";
 import {useWindowScroll} from 'react-use';
 import {gsap} from "gsap";
-
+import { useNavigate } from "react-router-dom";
 
 
 const navItems = [
@@ -23,8 +23,9 @@ const navItems = [
 ];
 
 const Navbar = () => {
-const {user} = useAuthStore((state)=>state);
+const {user, token} = useAuthStore((state)=>state);
 const navRef = useRef(null);
+const navigate = useNavigate();
 
 const [lastScrollY, setLastScrollY] = useState(0);
 const [isNavVisible, setIsNavVisible] = useState(true);
@@ -54,6 +55,12 @@ useEffect(()=>{
      duration : 0.2, 
   })
 },[isNavVisible]);
+
+
+
+if(!token){
+       navigate("/login-signup");
+  }
 
 
 

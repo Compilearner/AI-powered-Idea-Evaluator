@@ -39,9 +39,9 @@ const onSubmit = async (data) => {
 
         const newData = await res.json();
     
-        console.log(newData.evaluation);
+        // console.log(newData.evaluation);
 
-        if(newData.evaluation){
+        if(newData.evaluation ){
            setIsLoadingSpin(false);
             setResponse(newData.evaluation);
         }

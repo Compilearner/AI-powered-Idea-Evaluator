@@ -14,5 +14,8 @@ userId : {
 
 },{timestamps: true});
 
+ideaSchema.index({ userId: 1, description: 1 }, { unique: true });
+
+
 const Idea = mongoose.model("Idea", ideaSchema);
 export default Idea;

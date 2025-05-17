@@ -2,11 +2,16 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../Store/authStore';
 import {toast} from 'react-hot-toast';
-import { FaCommentDots } from 'react-icons/fa';
+// import { FaCommentDots } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Feedback = () => {
 const { register, handleSubmit, reset } = useForm();
-const {feed} = useAuthStore((state)=>state);
+const {feed, token} = useAuthStore((state)=>state);
+const navigate = useNavigate();
+
 
 const onSubmit = async(data)=>{
      try{
@@ -37,9 +42,14 @@ const onSubmit = async(data)=>{
 }
 
 
+if(!token){
+       navigate("/login-signup");
+  }
+
+
   return (
     <div className='bg-black h-screen flex flex-col gap-16 justify-center items-center'>
-      <h2 className='text-white text-3xl p-3 bg-green-600 w-full text-center libre-baskerville-bold'>Give us your valuable feedback</h2>
+      <h2 className='text-white text-3xl p-3 bg-green-700 w-full text-center libre-baskerville-bold'>Give us your valuable feedback</h2>
         <div className=' w-[45vw] bg-transparent h-[55vh] rounded-lg outline-1 outline-white border'>
             <form onSubmit={handleSubmit(onSubmit)} className=' p-6  flex justify-center gap-6 flex-col w-full'>
               {/* <span><FaCommentDots className='text-white text-2xl'/></span> */}
@@ -55,7 +65,7 @@ const onSubmit = async(data)=>{
                <textarea className='w-full bg-transparent p-2 libre-baskerville-bold border text-white' {...register('suggestion')}  placeholder='Any suggestions to make it better....' rows={3}/>
               </div>
               <div className='w-full flex justify-center items-center'>
-                <button type='submit' className='border-none px-4 py-1 w-36 bg-green-600 text-white libre-baskerville-bold rounded-md text-xl'>Submit</button>
+                <button type='submit' className='border-none px-4 py-1 w-36 bg-green-700 text-white libre-baskerville-bold rounded-md text-xl'>Submit</button>
               </div>
             </form>
         </div>

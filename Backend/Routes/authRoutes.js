@@ -15,12 +15,12 @@ router.post("/autoCheck", verifyToken, (req,res)=>{
     return res.status(201).json({success:true, user:req.user});
 })
 
-router.post("/evaluate-idea", ideaEvaluation);
+router.post("/evaluate-idea",  ideaEvaluation);
 
-router.post("/fetchIdeas", getIdeas);
+router.post("/fetchIdeas", verifyToken, getIdeas);
 
-router.delete("/deleteIdea/:id", deleteIdea);
+router.delete("/deleteIdea/:id", verifyToken, deleteIdea);
 
-router.post("/feed", feedback);
+router.post("/feed",verifyToken, feedback);
 
 export default router;

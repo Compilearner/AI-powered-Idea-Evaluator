@@ -17,7 +17,6 @@ export const ideaEvaluation = async (req, res) => {
   if(!userID)
     return res.status(400).json({ success: false, message: 'UserID is missing'});
 
-  let reply = ""; 
  
 const prompt = `
 You are an expert at evaluating startup or project ideas, product inventions and similar proposals.
@@ -64,7 +63,9 @@ Evaluate the user's idea and provide a concise, helpful response (friendly tone)
 Respond ONLY in the following JSON format:
 
 if(idea is not a valid input)
-  ${reply} = "Sorry, I can only evaluate ideas or similar inventions, not other types of input."
+  {
+    "ans": "Sorry, I can only evaluate ideas or similar inventions, not other types of input."
+  }
 else {
   {
     "summary": "...",
@@ -80,37 +81,45 @@ User's idea:
 "${idea}"
 `;
 
+let parsedReply;
 
+try {
+  
+  const response = await client.chat.complete({
+    model: "mistral-small-latest",
+    messages: [{ role: 'user', content: prompt }],
+  });
+
+  const rawReply = response.choices[0]?.message?.content || 'No evaluation available.';
+  const cleanedReply = rawReply.replace(/```json|```/g, '').trim();
+
+   parsedReply = JSON.parse(cleanedReply);
+
+  // Don't store invalid ideas
+  if (parsedReply.ans === "Sorry, I can only evaluate ideas or similar inventions, not other types of input.") {
+    return res.status(200).json({ evaluation: parsedReply });
+  }
+
+  // Save only valid ideas
+  const newIdea = new Idea({
+    description: idea,
+    userId: userID,
+  });
+
+  await newIdea.save();
 
   
-  try {
-   let parsedReply = {};
-
-    if(!reply){
-      const response = await client.chat.complete({
-      model: "mistral-small-latest",
-      messages: [{ role: 'user', content: prompt }],
-    });
-
-    const rawReply = response.choices[0]?.message?.content || 'No evaluation available.';
-    const cleanedReply = rawReply.replace(/```json|```/g, '').trim();
-    
-    parsedReply = JSON.parse(cleanedReply);
-
-    const newIdea = new Idea({
-    description: idea,
-    userId: userID
-   })  
-
-    await newIdea.save();
-  }
-
-
-    res.status(200).json({ evaluation : parsedReply || reply });
   } catch (error) {
-    console.error(error.response?.data || error.message);
-    res.status(500).json({ success: false, message: error.message });
+    if(error.code === 11000){
+      console.log("Duplicate idea---Skipping save");
+  
+    }else{
+      console.error(error.response?.data || error.message);
+      res.status(500).json({ success: false, message: error.message });
+    }
   }
+
+  return res.status(200).json({ evaluation: parsedReply });
 };
 
 

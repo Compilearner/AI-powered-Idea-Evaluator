@@ -38,26 +38,26 @@ const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError 
         </button></span>
 
 
-        <div className=' bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
+        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
           <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">Does it solve a real problem or is it just minimal?</h3>
           <p className='libre-baskerville-regular'>{output.realWorldImpact}</p>
         </div>
 
-        <div className=' bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
+        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
           <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">Is it good for their resume?</h3>
           <p className='libre-baskerville-regular'>{output.resumeValue}</p>
         </div>
 
         {
          output.technicalSuggestions && (
-        <div className='  bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
+        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
           <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">How could this be built or approached technically?</h3>
           <p className='libre-baskerville-regular'>{output.technicalSuggestions}</p>
         </div>
          )
        }
 
-        <div className='   bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
+        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
           <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">How much score you get for this?</h3>
            <p className='libre-baskerville-regular'>{output.score}/10</p>
            <ReactStars
@@ -70,12 +70,12 @@ const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError 
            />
         </div>
 
-        <div className=' bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
+        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
           <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">- Is this a good project to work on for their stage?</h3>
           <p className='libre-baskerville-regular'>{output.summary}</p>
         </div>
 
-        <div className=' bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
+        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
           <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">Minimal Suggestion</h3>
           <p className='libre-baskerville-regular'>{output.motivation}</p>
         </div>
@@ -88,7 +88,7 @@ const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError 
         </button></span>
         
          <div className='w-full h-16  rounded-lg flex justify-center items-center'>
-          <p className=' text-center text-xl libre-baskerville-bold'>{output.evaluationSummary || output}</p>
+          <p className=' text-center text-xl libre-baskerville-bold'>{output.ans}</p>
          </div>
     </div>)
   )
