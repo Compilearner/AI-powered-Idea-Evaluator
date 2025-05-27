@@ -22,7 +22,7 @@ export const registerUser = async(req, res)=>{
     console.log(newUser);
 
     // Generate JWT Tokens
-    const token = jwt.sign({userId:newUser._id}, process.env.TOKEN_KEY, {expiresIn: "5h"});
+    const token = jwt.sign({userId:newUser._id}, process.env.TOKEN_KEY, {expiresIn: "1d"});
     res.cookie("token", token, {
         httpOnly:true,
         // secure: 
@@ -53,7 +53,7 @@ export const loginUser = async(req, res)=>{
     }
 
     // Generate JWT Tokens
-    const token = jwt.sign({userId:user._id, userName: user.userName}, process.env.TOKEN_KEY, {expiresIn:"5h"});
+    const token = jwt.sign({userId:user._id, userName: user.userName}, process.env.TOKEN_KEY, {expiresIn:"1d"});
     res.cookie("token", token, {
         httpOnly:true,
         secure: process.env.NODE_ENV === "production" 

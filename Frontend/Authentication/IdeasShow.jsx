@@ -42,7 +42,7 @@ useEffect(()=>{
      {/** Idea History Container */}
         <div className="w-2/3   flex- flex-col justify-center items-center  border bg-white  rounded-xl p-6">
         <h2 className="libre-baskerville-bold  text-2xl text-center  mb-4">Ideas History</h2>
-           {
+           { ideas.length > 0 &&
              ideas.slice(0,visibleCount).map((idea, idx)=>{
               return (
                 <div key={idea._id} className="rounded-lg p-3 mt-4 text-center relative w-full bg-gray-200 shadow shadow-gray-300">
@@ -61,6 +61,13 @@ useEffect(()=>{
              <button onClick={handleShowMore} className=' p-3 rounded-md bg-black libre-baskerville-bold text-white text-xl '>Show more</button>
             </div>
            )}
+
+           { /** No Ideas Exist */}
+           {
+              !ideas.length && (
+                <p className='libre-baskerville-regular  text-xl text-center text-red-600'>No Ideas Yet.....</p>
+              )
+           }
         </div>
     </>  
   )

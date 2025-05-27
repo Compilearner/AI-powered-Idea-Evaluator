@@ -37,18 +37,15 @@ const onSubmit = async(data)=>{
       }
 
      }catch(err){
-        console.log(err);
+    console.log(err);
      }
 }
 
 
-if(!token){
-       navigate("/login-signup");
-  }
 
-
-  return (
-    <div className='bg-black h-screen flex flex-col gap-16 justify-center items-center'>
+  return token ? (
+  
+     <div className='bg-black h-screen flex flex-col gap-16 justify-center items-center'>
       <h2 className='text-white text-3xl p-3 bg-green-700 w-full text-center libre-baskerville-bold'>Give us your valuable feedback</h2>
         <div className=' w-[45vw] bg-transparent h-[55vh] rounded-lg outline-1 outline-white border'>
             <form onSubmit={handleSubmit(onSubmit)} className=' p-6  flex justify-center gap-6 flex-col w-full'>
@@ -70,7 +67,8 @@ if(!token){
             </form>
         </div>
     </div>
-  )
+  ):
+  (navigate("/login-signup"))
 }
 
 export default Feedback
