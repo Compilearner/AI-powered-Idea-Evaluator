@@ -21,7 +21,7 @@ const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError 
         </button></span>
         
          <div className='w-full h-16  rounded-lg flex justify-center items-center'>
-          <p className=' text-center text-xl libre-baskerville-bold'>Internal Server Erorr</p>3
+          <p className=' text-center text-xl libre-baskerville-bold'>Internal Server Erorr</p>
          </div>
     </div>
  ) 
@@ -58,7 +58,7 @@ const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError 
        }
 
         <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
-          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">How much score you get for this?</h3>
+          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">Project Score</h3>
            <p className='libre-baskerville-regular'>{output.score}/10</p>
            <ReactStars
            count={10}                    // 10 stars
@@ -71,7 +71,7 @@ const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError 
         </div>
 
         <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
-          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">- Is this a good project to work on for their stage?</h3>
+          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">- Is this a good project to work on?</h3>
           <p className='libre-baskerville-regular'>{output.summary}</p>
         </div>
 

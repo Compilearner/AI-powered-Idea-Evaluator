@@ -69,7 +69,7 @@ const onSubmit = async (data) => {
 
 
   return (
-    <div className={` w-full h-screen mx-auto flex flex-col justify-center gap-8 bg-black items-center relative py-12  mt-7  `}>
+    <div className={` w-full h-screen mx-auto flex flex-col justify-center gap-8  items-center relative py-12  mt-7  `}>
         <h2 className='text-4xl text center libre-baskerville-bold text-white'>Let's Test The Idea</h2>
       {/*** Modal window */}
       {

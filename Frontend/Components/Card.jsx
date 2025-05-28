@@ -2,21 +2,14 @@ import React from 'react'
 
 const Card = ({item}) => {
   return (
-<div className="relative w-[25vw] h-[55vh] bg-white rounded-[3rem] flex flex-col items-center p-4 space-y-4 overflow-hidden  group hover:translate-x-2 hover:translate-y-2 transition-all duration-200 ease-in-out" >
-  {/* Gradient Overlay */}
-   <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/40 to-transparent z-0 rounded-b-[3rem]" />
-
-  {/* Main Content */}
-   <img 
-    src={item.src} 
-    alt={item.alt}
-    className="w-[95%] h-[10rem] object-cover border border-gray-200 rounded-xl  relative z-10" 
-  />
-  
-   <div className="text-center space-y-2 relative z-10">
-      <h1 className="text-black text-2xl font-semibold libre-baskerville-regular">{item.title}</h1>
-      <p className="text-gray-600 text-base font-medium libre-baskerville-regular">{item.description}</p>
-  </div>
+<div className="relative w-[80vw] h-[50vh]  border-gray-500 border rounded-[3rem] flex items-center p-10 gap-24 overflow-hidden shadow-lg " >
+    <div className='w-2/5 h-4/5'>
+        <img src={item.src} alt={item.alt} className='object-cover w-full h-full ' />
+    </div>
+    <div className=' w-2/4 flex flex-col gap-10' >
+         <h2 className='roboto-semibold text-4xl '>{item.title}</h2>
+         <p className='libre-baskerville-regular text-gray-500 text-lg'>{item.description}</p>
+    </div>
 </div>
   )
 }

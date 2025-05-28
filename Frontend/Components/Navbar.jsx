@@ -4,7 +4,7 @@ import { useAuthStore } from "../Store/authStore";
 import { useRef, useState, useEffect } from "react";
 import {useWindowScroll} from 'react-use';
 import {gsap} from "gsap";
-import { useNavigate } from "react-router-dom";
+
 
 
 const navItems = [
@@ -13,19 +13,14 @@ const navItems = [
     to: "/",
   },
   {
-    item: "Feedback",
-    to: "/feedback",
-  },
-  {
     item: "Get Started",
     to: "/playground",
   },
 ];
 
 const Navbar = () => {
-const {user, token} = useAuthStore((state)=>state);
+const {user} = useAuthStore((state)=>state);
 const navRef = useRef(null);
-const navigate = useNavigate();
 
 const [lastScrollY, setLastScrollY] = useState(0);
 const [isNavVisible, setIsNavVisible] = useState(true);
@@ -57,13 +52,6 @@ useEffect(()=>{
 },[isNavVisible]);
 
 
-
-// if(!token){
-//        navigate("/login-signup");
-//   }
-
-
-
   return (
     <nav className="flex w-full h-20 justify-around items-center fixed inset-x-0 border-none top-2 z-50 bg-white" ref={navRef}>
       <div className="flex justify-center items-center gap-9 w-2/3 h-12 rounded-2xl p-6 border border-gray-500">
@@ -72,6 +60,7 @@ useEffect(()=>{
             { (user && Item.item === "Get Started") ? "Playground" :  Item.item}
           </Link>
         ))}
+        <a href="#feedback" className="mx-2 text-lg font-semibold libre-baskerville-bold hover:underline decoration-slate-400 underline-offset-4">Feedback</a>
       </div>
        <UserButton/>
     </nav>

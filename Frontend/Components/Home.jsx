@@ -2,7 +2,7 @@ import CardsSection from "./CardsSection"
 import Footer from "./Footer"
 import { Link } from "react-router-dom"
 import { useAuthStore } from "../Store/authStore"
-
+import Feedback from "./Feedback";
 
 
 
@@ -12,8 +12,7 @@ const {user} = useAuthStore((state)=>state);
   return (
   
     <main className="relative" >
-    
-        <div className="w-full flex justify-around items-center my-[2rem] pr-4">
+        <div className="w-full h-[77vh] flex justify-around items-center my-[2rem] pr-4">
           <div className="flex flex-col w-[45%] pl-5">
               <h1 className="libre-baskerville-bold text-[2.3rem] font-bold">Get Feedback on Your Ideas in Minutes!</h1>
               <p className="libre-baskerville-bold text-xl ">Not sure about your own idea?</p>
@@ -29,10 +28,11 @@ const {user} = useAuthStore((state)=>state);
           </div>
         </div>
         <CardsSection/>
+        <Feedback/>
         <Footer/>
     </main>
     
-  )
+  );
 }
 
 export default Home
