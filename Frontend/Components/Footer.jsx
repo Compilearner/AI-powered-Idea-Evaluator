@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
 console.log(year);
 
   return (
-    <footer className="w-full h-10 p-2 bg-black">
+    <footer className="w-full h-10 p-2 bg-gray-600">
         <div className="flex justify-center items-center gap-3">
             <div className="flex justify-center items-center gap-2"> 
                <p className="text-lg  text-white libre-baskerville-regular">Copyright</p>

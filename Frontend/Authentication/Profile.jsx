@@ -9,14 +9,28 @@ const {user} = useAuthStore((state)=> state);
    
 
   return (
-    <div className="h-screen w-full bg-black flex flex-col justify-start gap-14 items-center pt-24 pb-6 ">
+  <div className="h-full w-full relative flex flex-col justify-start gap-14 items-center pt-24 pb-6 ">
+
       {/** User Profile Container */}
-        <div className=" w-2/5 h-36 flex flex-col justify-center items-center gap-4 border border-black rounded-full bg-white p-4">
-             <span className=""><FaUser className=" w-full h-16 p-3 text-white bg-black rounded-full"/></span>
-             <h2 className="libre-baskerville-bold  text-xl ">Username : {user.userName}</h2>
-        </div>
-       <IdeasShow/>
-    </div>
+      <div className="relative w-full h-[50vh] flex justify-center items-center bg-black">
+        {/* Background image with black overlay */}
+       <div className="absolute inset-0">
+          <div className="w-[50%] mx-auto h-full bg-[url('/Images/purpose.jpg')] bg-cover bg-center">
+          <div className="w-full h-full bg-black/80"></div>
+       </div>
+      </div>
+
+  {/* Foreground content */}
+       <div className="relative z-10 flex flex-col items-center gap-4">
+        <span>
+           <FaUser className="w-24 h-24 p-3 bg-white rounded-full" />
+        </span>
+       <h2 className="text-[1.8rem]  text-white roboto-normal">{user.userName}</h2>
+       </div>
+      </div>
+    <IdeasShow/>   
+  </div>
+       
   );
 
 }

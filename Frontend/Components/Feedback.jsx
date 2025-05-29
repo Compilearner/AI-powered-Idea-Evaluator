@@ -2,15 +2,14 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../Store/authStore';
 import { toast } from 'react-hot-toast';
-// import { FaCommentDots } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+
 
 
 
 const Feedback = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { feed, token } = useAuthStore((state) => state);
-  const navigate = useNavigate();
+  const { feed } = useAuthStore((state) => state);
+ 
 
 
   const onSubmit = async (data) => {
@@ -43,10 +42,10 @@ const Feedback = () => {
 
 
 
-  return token ? (
+  return (
 
     <div id='feedback' className=' h-[100vh] flex flex-col   gap-16 justify-between items-center py-[5rem] relative'>
-      <h2 className='libre-baskerville-bold  text-3xl text-white text-center p-4 bg-black w-full'>Give us your valuable feedback</h2>
+      <h2 className='libre-baskerville-bold  text-4xl text-white text-center p-4 bg-black w-screen'>GIVE US YOUR VALUABLE FEEDBACK</h2>
       <div className='flex justify-center items-center gap-6  rounded-[3rem] shadow-xl border border-gray-500  px-4 '>
         <div className='w-2/5 h-[75%] '>
           <img src='/Images/feedback.png' alt='feedback box illustration' className='object-cover w-full h-full' />
@@ -64,8 +63,7 @@ const Feedback = () => {
         </div>
       </div>
     </div>
-  ) :
-    (navigate("/login-signup"))
+  ) 
 }
 
 export default Feedback

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import UserButton from "./UserButton";
 import { useAuthStore } from "../Store/authStore";
 import { useRef, useState, useEffect } from "react";
@@ -19,6 +19,9 @@ const navItems = [
 ];
 
 const Navbar = () => {
+const location = useLocation();
+const showFeedback = location.pathname === '/';
+
 const {user} = useAuthStore((state)=>state);
 const navRef = useRef(null);
 
@@ -60,7 +63,11 @@ useEffect(()=>{
             { (user && Item.item === "Get Started") ? "Playground" :  Item.item}
           </Link>
         ))}
-        <a href="#feedback" className="mx-2 text-lg font-semibold libre-baskerville-bold hover:underline decoration-slate-400 underline-offset-4">Feedback</a>
+
+      {
+        showFeedback && <a href="#feedback" className="mx-2 text-lg font-semibold libre-baskerville-bold hover:underline decoration-slate-400 underline-offset-4">Feedback</a>
+      }
+
       </div>
        <UserButton/>
     </nav>

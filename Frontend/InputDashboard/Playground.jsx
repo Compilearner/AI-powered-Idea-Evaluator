@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../Store/authStore';
 import { useNavigate } from 'react-router-dom';
 import EvaluationOutput from './EvaluationOutput';
+import {  FaLightbulb } from 'react-icons/fa';
 
 
 const Playground = () => {
@@ -62,15 +63,17 @@ const onSubmit = async (data) => {
   }
 
 
+  return token ? (
+    <div className={` w-full h-full mx-auto flex flex-col justify-center gap-8  items-center relative py-12  mt-7  `}>
+        <div className='w-full flex flex-col justify-center my-11 gap-2'>
+         <h2 className='text-4xl text center libre-baskerville-bold self-center'>Here is your playground to check your score</h2>   
+        <div className='text-xl text center flex justify-center gap-1 text-gray-400 libre-baskerville-regular  w-full text-center p-2 self-center'>
+            <p>Let's Test The Idea</p>
+            <span className='self-center'><FaLightbulb className='text-2xl '/></span>
+        </div>
+            
+        </div>
 
-  if(!token){
-       navigate("/login-signup");
-  }
-
-
-  return (
-    <div className={` w-full h-screen mx-auto flex flex-col justify-center gap-8  items-center relative py-12  mt-7  `}>
-        <h2 className='text-4xl text center libre-baskerville-bold text-white'>Let's Test The Idea</h2>
       {/*** Modal window */}
       {
         isLoading  && ( <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-opacity duration-500">
@@ -81,7 +84,7 @@ const onSubmit = async (data) => {
         </div>)
       }
 
-        <form onSubmit={handleSubmit(onSubmit)} className=' w-[80%] h-[60vh]  bg-gray-100 flex flex-col gap-12  px-8 py-8 border border-gray-400 rounded-xl'>
+        <form onSubmit={handleSubmit(onSubmit)} className=' w-[60%] h-[55vh]  bg-gray-100 flex flex-col gap-12  px-8 py-8 border border-gray-400 rounded-xl'>
            
               {/** Idea Description */}
               <div className='w-full  shadow-md shadow-gray-400 rounded-md'>
@@ -120,12 +123,13 @@ const onSubmit = async (data) => {
 
                {/** Submit Button */}
                <div className='flex justify-center items-center gap-6'>
-                  <button type='button' onClick={handleReset} className='text-xl w-[25%] h-11 rounded-md px-2 bg-black text-white libre-baskerville-bold hover:bg-gray-400 transition-all ease-in-out duration-300 '>Reset Input</button>
+                  <button type='button' onClick={handleReset} className='text-xl w-[25%] h-11 rounded-md px-2 bg-black text-gray-400 libre-baskerville-bold hover:bg-gray-400 transition-all ease-in-out duration-300 '>Reset Input</button>
                   <button type='submit' className='text-xl w-[25%] h-11 rounded-md px-2 bg-green-700 text-white libre-baskerville-bold hover:bg-gray-400 transition-all ease-in-out duration-300 '>Evaluate Idea</button>
                </div>
         </form>
     </div>
-  )
+  ):
+  (navigate("/login-signup"))
 }
 
 export default Playground

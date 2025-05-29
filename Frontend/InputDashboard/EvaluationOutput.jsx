@@ -26,10 +26,10 @@ const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError 
     </div>
  ) 
   : (  output?.score != null ? (
-      <div className={` w-[90%]  h-[90%] relative bg-white grid grid-cols-2 grid-rows-3 grid-flow-row-dense gap-8 py-16 px-12 rounded-md shadow-md space-y-4 opacity-0 overflow-y-scroll ${output ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}` }>
-        <div className='w-full absolute mt-5 h-9 flex justify-center gap-2'>
-             <span className='self-center'><FaLightbulb className='text-5xl '/></span>
-            <h2 className="text-3xl font-bold text-gray-800 libre-baskerville-bold "> Idea Evaluation</h2>
+      <div className={` w-[90%]  h-[90%] relative bg-white grid grid-cols-2 grid-rows-3 grid-flow-row-dense gap-8 py-16 px-12 rounded-md shadow-md space-y-4 opacity-0  ${output ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}` }>
+        <div className='w-full absolute mt-5 h-11 flex justify-center gap-2'>
+             {/* <span className='self-center'><FaLightbulb className='text-5xl '/></span> */}
+            <h2 className="text-3xl font-bold text-gray-400 bg-black w-full text-center p-2 libre-baskerville-bold "> Idea Evaluation</h2>
         </div>
 
         {/** Close button */}
