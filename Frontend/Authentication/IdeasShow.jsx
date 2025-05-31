@@ -40,25 +40,25 @@ useEffect(()=>{
   return (
     <>
      {/** Idea History Container */}
-        <div className="w-full h-fit  flex flex-col justify-center items-center   bg-white  rounded-xl py-6 ">
-        <h2 className="roboto-semibold text-3xl text-center  p-4 w-full mb-4">Ideas History</h2>
+        <div className="w-full h-fit  flex flex-col justify-center items-center     rounded-xl py-6 ">
+        <h2 className="roboto-semibold text-3xl text-center text-white p-4 w-full mb-4">IDEAS HISTORY</h2>
            { ideas.length > 0 &&
              ideas.slice(0,visibleCount).map((idea, idx)=>{
               return (
-                <div key={idea._id} className=" w-3/4 rounded-lg p-3 mt-4 text-center relative border border-gray-200  shadow shadow-gray-300">
+                <div key={idea._id} className=" w-3/4  p-3 mt-4 text-center relative border-b   shadow ">
                   { /** Delete Button */}
                   <button className='absolute top-2 -right-3 border-none w-10  ' onClick={()=>handleDeleteIdea(idea._id)}><FaTimes className='text-lg text-red-600'/></button>
                     
 
                    <span className='absolute top-1 left-2 libre-baskerville-bold text-green-700'>({idx+1})</span> 
-                  <p className="roboto-normal  text-lg p-4"> {idea.description}</p>
+                  <p className="roboto-normal text-white text-lg p-4"> {idea.description}</p>
                 </div>
               )
              }) 
            }
            {visibleCount < ideas.length && (
             <div className='flex justify-center items-center mt-6 '>
-             <button onClick={handleShowMore} className=' p-3 rounded-md bg-black libre-baskerville-bold text-white text-xl '>Show more</button>
+             <button onClick={handleShowMore} className=' p-3 rounded-md bg-green-600 libre-baskerville-bold text-white text-xl '>Show more</button>
             </div>
            )}
 

@@ -97,7 +97,7 @@ try {
 
   // Don't store invalid ideas
   if (parsedReply.ans === "Sorry, I can only evaluate ideas or similar inventions, not other types of input.") {
-    return res.status(200).json({ evaluation: parsedReply });
+    return res.status(200).json({success: true, evaluation: parsedReply });
   }
 
   // Save only valid ideas
@@ -119,7 +119,7 @@ try {
     }
   }
 
-  return res.status(200).json({ evaluation: parsedReply });
+  return res.status(200).json({ success:true, evaluation: parsedReply });
 };
 
 

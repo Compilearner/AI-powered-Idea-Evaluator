@@ -15,7 +15,8 @@ const [response, setResponse] = useState({});
 const [error, setError] = useState(false);
 
 
-const {user, token } = useAuthStore((state) => state);
+const {user, token, playground } = useAuthStore((state) => state);
+
 
 const onSubmit = async (data) => {
     console.log('Form submitted:', data);
@@ -23,36 +24,18 @@ const onSubmit = async (data) => {
     setIsLoadingSpin(true);
 
 
-    try{
-        const res = await fetch("/api/evaluate-idea", {
-            method : "POST",  
-            headers: {
-                    'Content-Type': 'application/json',  
-                      },
-            credentials: 'include',          
-            body: JSON.stringify({ ...data, userID: user._id  || user.userId })
+        const res = await playground({...data, userID: user._id || user.userId});
   
-        });
-
-        if(!res.ok){
-           throw new Error('Server Error');
-        }
-
-        const newData = await res.json();
-    
-        // console.log(newData.evaluation);
-
-        if(newData.evaluation ){
+        if(res.success && res.evaluation) {
+            setIsLoadingSpin(false);
+            setResponse(res.evaluation);
+        }else{
            setIsLoadingSpin(false);
-            setResponse(newData.evaluation);
+           setError(true);
         }
-
-    }catch(err){
-        console.log(err);
-        setIsLoadingSpin(false);
-        setError(true);
-    }
+       
   };
+
 
   const handleReset = ()=>{
       reset({

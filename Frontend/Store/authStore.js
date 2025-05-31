@@ -177,6 +177,34 @@ export const useAuthStore = create(
                 }catch(err){
                      console.log(err);
                 }
+            },
+
+            playground : async ({  userID, ...data})=>{
+                   try{
+                    const res = await fetch("/api/evaluate-idea", {
+                        method : "POST",  
+                        headers: {
+                                'Content-Type': 'application/json',  
+                                  },
+                        credentials: 'include',          
+                        body: JSON.stringify({ ...data, userID})
+              
+                    });
+
+                    if(!res.ok){
+                        const errorData = await res.json();
+                        throw new Error(errorData.message ||'Server Error');
+                     }
+
+                    const newData = await res.json();
+                    return {success :true, evaluation : newData.evaluation};
+                      
+
+                   }catch(err){
+                      console.log(err);
+                      return {success :false, message:err.message};
+                      
+                   }
             }
 
         }),

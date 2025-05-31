@@ -23,7 +23,7 @@ const cardDetails = [
 
 const CardsSection = () => {
   return (
-  <section className=" pt-[1rem] relative">
+  <section className=" pt-[1rem] relative bg-black">
      {/* 🎨 Decorative Background Circles */}
      <div className="absolute inset-0 -z-10">
         <div className="absolute w-60 h-60 bg-black rounded-full opacity-20 blur-3xl top-20 left-10"></div>

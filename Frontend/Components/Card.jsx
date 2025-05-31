@@ -51,13 +51,13 @@ const Card = ({ item, index }) => {
   return (
     <div
       ref={cardRef}
-      className="relative w-[80vw] h-[50vh] rounded-[3rem] flex items-center p-10 gap-24 overflow-hidden "
+      className="relative w-[80vw] h-[50vh] rounded-[3rem] flex items-center p-10 gap-24 overflow-hidden border border-gray-100 "
     >
       <div className="w-2/5 h-4/5">
         <img src={item.src} alt={item.alt} className="object-cover w-full h-full" />
       </div>
       <div className="w-2/4 flex flex-col gap-10">
-        <h2 className="roboto-semibold text-4xl">{item.title}</h2>
+        <h2 className="roboto-semibold text-white text-4xl">{item.title}</h2>
         <p className="libre-baskerville-regular text-gray-500 text-lg">{item.description}</p>
       </div>
     </div>
