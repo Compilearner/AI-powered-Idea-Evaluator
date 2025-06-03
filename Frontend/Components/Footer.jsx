@@ -3,7 +3,6 @@ import { FaCopyright } from "react-icons/fa"
 
 const Footer = () => {
 const year = new Date().getFullYear();
-console.log(year);
 
   return (
     <footer className="w-full h-10 p-2 bg-gray-600">

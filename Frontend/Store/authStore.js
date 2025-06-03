@@ -123,7 +123,7 @@ export const useAuthStore = create(
 
 
                       const data = await res.json();
-                      console.log(data);
+                      
 
                       if(!data.success)
                         return {success : false, message: data.message};
