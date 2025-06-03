@@ -1,8 +1,7 @@
-import React from 'react'
-import {  FaLightbulb, FaTimes } from 'react-icons/fa';
-import ReactStars from 'react-stars';
+import { FaTimes } from 'react-icons/fa';
 
-const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError }) => {
+
+const EvaluationOutput = ({ output, setResponse , setIsLoading, error, setError }) => {
 
     const handleClose = ()=>{
         setIsLoading(false);
@@ -12,87 +11,69 @@ const EvaluationOutput = ({ output, setIsLoading, setResponse , error, setError 
     }
 
 
-  return (
-  error ? (
-          <div className={` w-[30%]  relative bg-white flex flex-col justify-center items-center gap-2 py-4 px-12 rounded-md shadow-md space-y-4 opacity-0 ${output ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}` }>
+  return error ? (
+          <div className={` w-[30%]  relative bg-white flex flex-col justify-center items-center gap-2 py-4 px-12 rounded-md shadow-md space-y-4 opacity-0 ${error ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}` }>
          {/** Close button */}
         <span className='absolute right-6 top-2'><button className=' size-8 font-bold text-xl text-red-600  rounded-full border-none ' onClick={handleClose} >
           <FaTimes className='text-2xl'/>
         </button></span>
         
          <div className='w-full h-16  rounded-lg flex justify-center items-center'>
-          <p className=' text-center text-xl libre-baskerville-bold'>Internal Server Erorr</p>
+          <p className=' text-center text-xl libre-baskerville-bold'>Internal Server Error</p>
          </div>
     </div>
  ) 
-  : (  output?.score != null ? (
-      <div className={` w-[90%]  h-[90%] relative bg-white grid grid-cols-2 grid-rows-3 grid-flow-row-dense gap-8 py-16 px-12 rounded-md shadow-md space-y-4 opacity-0  ${output ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}` }>
-        <div className='w-full absolute mt-5 h-11 flex justify-center gap-2'>
-             {/* <span className='self-center'><FaLightbulb className='text-5xl '/></span> */}
-            <h2 className="text-3xl font-bold text-gray-400 bg-black w-full text-center p-2 libre-baskerville-bold "> Idea Evaluation</h2>
-        </div>
+  :  output.ExperienceLevel != null ? (
+      <div className={` w-[90%]  max-h-fit relative bg-gray-200 py-8 px-12 rounded-md shadow-md space-y-4 opacity-0  ${output.ExperienceLevel ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}` }>
+        <h1 className='libre-baskerville-regular text-[2rem] text-black text-center bg-white'>Here is your Response</h1>
 
         {/** Close button */}
         <span className='absolute right-2 top-2'><button className=' size-8 font-bold text-xl text-red-600  rounded-full border-none ' onClick={handleClose} >
           <FaTimes className='text-2xl'/>
         </button></span>
-
-
-        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
-          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">Does it solve a real problem or is it just minimal?</h3>
-          <p className='libre-baskerville-regular'>{output.realWorldImpact}</p>
+        
+        {/**Experiance based */}
+        <div className=''>
+            <h2 className='libre-baskerville-regular text-[1.4rem] text-black'>{output.ExperienceLevel.title}</h2>
+            <p className='roboto-normal text-gray-700 text-[1.1rem]'><strong>Rating: </strong>{output.ExperienceLevel.rating}</p>
+            <p className='roboto-normal text-gray-700 text-[1.1rem]'><strong>Evaluation: </strong>{output.ExperienceLevel.feedback}</p>
         </div>
 
-        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
-          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">Is it good for their resume?</h3>
-          <p className='libre-baskerville-regular'>{output.resumeValue}</p>
+        <div className=''>
+            <h2 className='libre-baskerville-regular text-[1.4rem] text-black'>{output.Purpose.title}</h2>
+            <p className='roboto-normal text-gray-700 text-[1.1rem]'><strong>Rating: </strong>{output.Purpose.rating}</p>
+            <p className='roboto-normal text-gray-700 text-[1.1rem]'><strong>Evaluation: </strong>{output.Purpose.feedback}</p>
         </div>
 
-        {
-         output.technicalSuggestions && (
-        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
-          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">How could this be built or approached technically?</h3>
-          <p className='libre-baskerville-regular'>{output.technicalSuggestions}</p>
-        </div>
-         )
-       }
-
-        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
-          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">Project Score</h3>
-           <p className='libre-baskerville-regular'>{output.score}/10</p>
-           <ReactStars
-           count={10}                    // 10 stars
-           value={output.score}          // score out of 10
-           size={24}
-           half={true}
-           edit={false}                  // read-only
-           color2={"#facc15"}   // Tailwind's yellow-400
-           />
+        {/** Recommendation Container */}
+        <div className=''>
+          <h2 className='libre-baskerville-regular text-[1.4rem] text-black'>Some Recommendations:</h2>
+            {output.Recommendations.steps.map((step, index)=>{
+              return (
+                <p key={index}>{step}</p>
+              )
+            })}
         </div>
 
-        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
-          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">- Is this a good project to work on?</h3>
-          <p className='libre-baskerville-regular'>{output.summary}</p>
+         {/** Feedback Container */}
+        <div className=''>
+          <h2 className='libre-baskerville-regular text-[1.4rem] text-black'>Final Evaluation:</h2>
+            <p>{output.OverallFeedback.feedback}</p>
         </div>
 
-        <div className=' h-fit bg-gray-100 p-4 rounded-md shadow-md shadow-gray-200'>
-          <h3 className="text-xl font-bold text-gray-800 libre-baskerville-bold">Minimal Suggestion</h3>
-          <p className='libre-baskerville-regular'>{output.motivation}</p>
-        </div>
+       
       </div>
-    ) :
-    (   <div className={` w-3/5  relative bg-white flex flex-col justify-center items-center gap-2 py-4 px-12 rounded-md shadow-md space-y-4 opacity-0 ${output ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}` }>
+    ) :(   <div className={` w-3/5  relative bg-white flex flex-col justify-center items-center gap-2 py-4 px-12 rounded-md shadow-md space-y-4 opacity-0 ${output ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}` }>
          {/** Close button */}
         <span className='absolute right-6 top-2'><button className=' size-8 font-bold text-xl text-red-600  rounded-full border-none ' onClick={handleClose} >
           <FaTimes className='text-2xl'/>
         </button></span>
         
          <div className='w-full h-16  rounded-lg flex justify-center items-center'>
-          <p className=' text-center text-xl libre-baskerville-bold'>{output.ans}</p>
+          <p className=' text-center text-xl text-red-700 libre-baskerville-bold'>{output.OverallFeedback.feedback}</p>
          </div>
-    </div>)
-  )
-);
+    </div>
+    ) 
 };
 
 

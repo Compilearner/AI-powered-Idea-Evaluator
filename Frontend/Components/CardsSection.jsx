@@ -43,7 +43,7 @@ const CardsSection = () => {
       {
         cardDetails.map((item, index) => {
           return (
-            <div   className={`${ index === 1 ? 'mr-[-10rem] rounded-[3rem] text-white' : 'ml-[-10rem]'}`} key={index}>
+            <div   className={`${ index === 1 ? 'mr-[-10rem] rounded-[3rem] ' : 'ml-[-10rem]'}`} key={index}>
               <Card item={item} index={index} />
             </div>
           )

@@ -35,6 +35,7 @@ const handleDeleteIdea = async(ideaId)=>{
 useEffect(()=>{
         fetchIdeas(user.userId || user._id);
         console.log(ideas);
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    },[fetchIdeas]);
 
   return (

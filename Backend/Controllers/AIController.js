@@ -17,69 +17,53 @@ export const ideaEvaluation = async (req, res) => {
   if(!userID)
     return res.status(400).json({ success: false, message: 'UserID is missing'});
 
- 
+
 const prompt = `
-You are an expert at evaluating startup or project ideas, product inventions and similar proposals.
+You are an AI idea evaluator.
 
-If the user input is not an idea--if it is a general question, factual query or anything not resembling an idea or leading to a product---respond with:
-"Sorry, I can only evaluate ideas or similar inventions, not other types of input."
+Your task is to evaluate a user's idea based on their experience level and the purpose behind working on idea (learning, portfolio, resume, etc.).
 
-For example:
-(1) User's idea: What is Dijkstra's algorithm?
-    AI: Sorry, I can only evaluate ideas or inventions, not other types of input.
+Respond in the following **JSON structured format**, adapting it naturally to the input:
 
-(2) User's idea: You know, what I did today in my school?
-    AI: Sorry, I can only evaluate ideas or inventions, not other types of input.
 
-(3) User's idea: A mobile app that connects volunteers with nearby NGOs.
-    AI: That's a thoughtful idea. Evaluation starts...
-
-(4) User's idea: I have a thought to work on building an AI-enhanced robot to help in my errands daily.
-    AI: That's a thoughtful idea. Evaluation starts...
-
-Evaluate the user's idea and provide a concise, helpful response (friendly tone) tailored to them. Use the following private evaluation criteria (do NOT mention these in the output):
-
-1. Mark the rating based on the user's skill level: "${skillLevel}".
-   - Output response could be changed based on skill and purpose, so dynamically handle those situations.
-
-2. Consider the user's purpose for evaluation: "${purpose}".
-   - Adapt your response based on the purpose (e.g., learning, resume, hackathon).
-
-3. Assess the uniqueness and real-world impact of the idea.
-   - If the idea is unique, moderately unique, common, or impactful, mention that briefly.
-
-4. Provide answers to these internal guiding questions to shape the response (do NOT show them to the user):
-   - Does it solve a real problem or is it just minimal?
-   - Is this a good project to work on for their stage?
-   - Is it good for their resume?
-   - How could this be built or approached technically?
-
-5. Give a final evaluation summary in 4 sentences.
-
-6. Provide a score out of 10 (based on idea quality, skill level, impact, user's purpose, and feasibility).
-
-7. If the score is above 6, motivate the user positively to pursue the idea.
-
-Respond ONLY in the following JSON format:
-
-if(idea is not a valid input)
-  {
-    "ans": "Sorry, I can only evaluate ideas or similar inventions, not other types of input."
+ EvaluationSummary = {
+  ExperienceLevel: {
+    title: Experience Level(${skillLevel}),
+    rating: "x/10",
+    feedback: "[Describe how well the idea fits their current skills. Be encouraging but realistic.]"
+  },
+  Purpose: {
+    title: Purpose(${purpose}),
+    rating: "x/10",
+    feedback: "[Describe how helpful the idea is for their goal. Adjust tone for learning vs resume vs hackathon.]"
+  },
+  Recommendations: {
+    steps: [
+      "Step 1: [Beginner → tutorials or basic projects | Intermediate → tools or datasets | Advanced → architecture or risk analysis]",
+      "Step 2: ...",
+      "Step 3: ..."
+    ]
+  },
+  OverallFeedback: {
+    feedback: "[Wrap up positively.]"
   }
-else {
-  {
-    "summary": "...",
-    "technicalSuggestion": "...",
-    "realWorldImpact": "...",
-    "resumeValue": "...",
-    "score": 8,
-    "motivation": "This sounds promising! You should definitely start working on it."
-  }
-}
+};
 
-User's idea:
-"${idea}"
+
+If the input is not an idea (like a question, general query or story), 
+Only return this string exactly, with no extra explanation, code block, or label:
+
+Sorry, I can only evaluate ideas or project-based proposals, not general queries and other invalid input.
+
+Do NOT wrap this in quotes.  
+Do NOT return JSON.  
+Do NOT add a heading.  
+Return this string as the **entire** reply.
+
+User's idea: "${idea}"
+
 `;
+
 
 let parsedReply;
 
@@ -88,20 +72,33 @@ try {
   const response = await client.chat.complete({
     model: "mistral-small-latest",
     messages: [{ role: 'user', content: prompt }],
+    temperature : 0.4,
   });
 
   const rawReply = response.choices[0]?.message?.content || 'No evaluation available.';
-  const cleanedReply = rawReply.replace(/```json|```/g, '').trim();
+  const cleanedReply = rawReply.replace(/```(json|javascript)?/g, '').replace(/```/g, '').trim();
+
+  // Don't store invalid ideas
+
+  const fallbackMessage = "Sorry, I can only evaluate ideas or project-based proposals, not general queries and other invalid input.";
+
+  if (cleanedReply.includes("only evaluate ideas") || cleanedReply === fallbackMessage) {
+    console.log(cleanedReply);
+    return res.status(200).json({success: true, evaluation: {
+      OverallFeedback : {
+        feedback: fallbackMessage,
+      }
+    }});
+  }
 
    parsedReply = JSON.parse(cleanedReply);
 
-  // Don't store invalid ideas
-  if (parsedReply.ans === "Sorry, I can only evaluate ideas or similar inventions, not other types of input.") {
-    return res.status(200).json({success: true, evaluation: parsedReply });
-  }
+  //  if(!parsedReply.EvaluationSummary){
+  //   return res.status(200).json({success: true, evaluation: "Sorry, I can only evaluate ideas or project-based proposals, not general queries and other invalid input."});
+  //  }
 
   // Save only valid ideas
-  const newIdea = new Idea({
+  const newIdea = await Idea.create({
     description: idea,
     userId: userID,
   });
@@ -119,7 +116,7 @@ try {
     }
   }
 
-  return res.status(200).json({ success:true, evaluation: parsedReply });
+  return res.status(200).json({ success:true, evaluation: parsedReply.EvaluationSummary });
 };
 
 

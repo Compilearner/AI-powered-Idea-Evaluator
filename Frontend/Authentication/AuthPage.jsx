@@ -53,7 +53,7 @@ const AuthPage = () => {
           const res = await register(newUser);
           if(res.success){
              toast.success(res.message);
-             setNewUser({userName:"", email:"", password:""});
+            //  setNewUser({userName:"", email:"", password:""});
 
              {/** TAKE SOME TIME TO SHOW UP FOR TOAST BEFORE NAVIGATING */}
              setTimeout(()=>{
@@ -89,7 +89,7 @@ const AuthPage = () => {
        
             if(res.success){
               toast.success(res.message);
-             setNewUser({ email:"", password:""});
+            //  setNewUser({ email:"", password:""});
 
              {/** TAKE SOME TIME TO SHOW UP FOR TOAST BEFORE NAVIGATING */}
              setTimeout(()=>{
@@ -130,21 +130,21 @@ const AuthPage = () => {
               <div className="w-full flex flex-col gap-2">
                 <div className="flex w-full justify-center items-center">
                     <span className="bg-gray-100 p-[.6rem]"><FaUser  className="text-gray-400 text-lg"/></span>
-                    <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none" type="text" placeholder="Username" value={newUser.userName} onChange={(e)=>setNewUser({...newUser, userName: e.target.value})} required/>
+                    <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none" name="userName" type="text" placeholder="Username" value={newUser.userName} onChange={(e)=>setNewUser({...newUser, userName: e.target.value})} required/>
                 </div>
                 {errors.userName && <p className="text-[.8rem] text-yellow-600 text-center">{errors.userName}</p>}
               </div>
               <div className="w-full flex flex-col gap-2">
                     <div className="flex w-full justify-center items-center">
                       <span className="bg-gray-100 p-[.6rem]"><FaEnvelope  className="text-gray-400 text-lg"/></span>
-                      <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="email" placeholder="Email" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value})} required/>
+                      <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none" name="email"  type="email" placeholder="Email" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value})} required/>
                 </div>
                   {errors.email && <p className="text-[.8rem] text-yellow-600 text-center">{errors.email}</p>}
               </div>
               <div className="w-full flex flex-col gap-2">
                 <div className="flex w-full justify-center items-center">
                     <span className="bg-gray-100 p-[.6rem]"><FaLock  className="text-gray-400 text-lg"/></span>
-                    <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="password" placeholder="Password" value={newUser.password} onChange={(e)=>setNewUser({...newUser, password: e.target.value})} required/>
+                    <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none" name="password"  type="password" placeholder="Password" value={newUser.password} onChange={(e)=>setNewUser({...newUser, password: e.target.value})} required/>
                 </div>
                  {errors.password && <p className="text-[.8rem] text-yellow-600 text-center">{errors.password}</p>}
               </div>
@@ -159,14 +159,14 @@ const AuthPage = () => {
                  <div className="w-full flex flex-col gap-2">
                     <div className="flex w-full justify-center items-center">
                       <span className="bg-gray-100 p-[.6rem]"><FaEnvelope  className="text-gray-400 text-lg"/></span>
-                      <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="email" placeholder="Email" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value})} required/>
+                      <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none" name="email"  type="email" placeholder="Email" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value})} required/>
                 </div>
                   {loginState && errors.email && <p className="text-yellow-600 w-full text-center text-[.8rem]" >{errors.email}</p>}
                 </div>
                 <div className="w-full flex flex-col gap-2">
                 <div className="flex w-full justify-center items-center">
                     <span className="bg-gray-100 p-[.6rem]"><FaLock  className="text-gray-400 text-lg"/></span>
-                    <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none"  type="password" placeholder="Password" value={newUser.password} onChange={(e)=>setNewUser({...newUser, password: e.target.value})} required/>
+                    <input className="bg-gray-300 pl-[.4rem] text-lg w-[70%] h-full focus:outline-none" name="password"  type="password" placeholder="Password" value={newUser.password} onChange={(e)=>setNewUser({...newUser, password: e.target.value})} required/>
                 </div>
                  {loginState && errors.password && <p className="text-yellow-600 text-center text-[.8rem]">{errors.password}</p>}
                 </div>
