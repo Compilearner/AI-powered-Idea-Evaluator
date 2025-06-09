@@ -8,13 +8,13 @@ const cardDetails = [
     alt:"purpose labeling with bulb",
   },
   {
-    title: "Idea Scoring System",
+    title: "Ideas Scoring System",
     description: "Get a instant score for your idea across key metrics like uniqueness, impact, and skill.",
     src: "/Images/evaluatie-score.png",
     alt:"Evaluation Score meter",
   },
   {
-    title: "Idea Store",
+    title: "Ideas Store",
     description: "Capture and organize your project ideas in one place. Easily save, and revisit them whenever inspiration strikes.",
     src: "/Images/store.jpg",
     alt:"Notes of idea in book",

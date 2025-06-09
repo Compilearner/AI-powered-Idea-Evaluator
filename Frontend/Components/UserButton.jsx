@@ -46,7 +46,7 @@ const handleLogout = async ()=>{
 
   return userState ?(
     <div className={`flex flex-col justify-center items-center gap-2 w-[30%] p-4 `} onClick={() => setIsOpen(true)} onMouseEnter={() => setIsOpen(true)}  onMouseLeave={() => setIsOpen(false)}>
-      <button className="flex justify-center items-center gap-2">
+      <button className="flex justify-center items-center gap-2" aria-label="open user menu">
           <span className=""><FaUser className="text-white bg-black size-8 border rounded-full p-1 border-gray-300"/></span>
           <span >
           { isOpen ? (<FaChevronUp className="text-black size-4 cursor-pointer"/>)  : (<FaChevronDown className="text-black size-4 cursor-pointer"/>)

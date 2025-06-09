@@ -4,7 +4,7 @@ import { connectDB } from "./Config/db.js";
 import authRoutes from "./Routes/authRoutes.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import rateLimiter from "./Middlewares/rateLimit.js";
+import compression from "compression";
 
 
 dotenv.config();
@@ -15,7 +15,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors()); // Allow all origins
-app.use("/api", rateLimiter);
+
+
+
+// Enable compression for all responses
+app.use(compression());
 
 app.use(cors({
   origin: 'http://localhost:5173',
