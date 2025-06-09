@@ -1,14 +1,13 @@
 import  { useEffect, useRef, useState } from 'react'
 import AuthPage from '../Authentication/AuthPage'
-import Home from '../Components/Home'
 import {Route, Routes, useLocation } from "react-router-dom";
-import { Profile } from '../Authentication/Profile';
-import Playground from '../InputDashboard/Playground';
 import { useAuthStore } from '../Store/authStore';
 import Navbar from '../Components/Navbar';
 import gsap from 'gsap';
 import { useWindowScroll } from 'react-use';
 import UserButton from '../Components/UserButton';
+import { lazy, Suspense } from 'react';
+import Home from '../Components/Home';
 
 
 const App = () => {
@@ -60,9 +59,12 @@ const {autoLogin} = useAuthStore((state)=>state);
     })
   },[isNavVisible]);  
 
+
+  const Playground = lazy(()=>import('../InputDashboard/Playground'));
+  const Profile = lazy(()=>import('../Authentication/Profile'));
+
   return (
-    
-    <>
+<>
     {
       showNavbar && (
         <header className="w-full h-20 fixed inset-0 z-50 flex justify-between md:justify-center items-center gap-8 md:gap-10 px-4" ref={navRef}>
@@ -71,14 +73,15 @@ const {autoLogin} = useAuthStore((state)=>state);
         </header>
       )
      }
-    
+  <Suspense fallback={<h1 className='text-xl text-center libre-baskerville-bold mt-12'>Loading.....</h1>}>
     <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login-signup' element={<AuthPage/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/playground' element={<Playground/>}/>
     </Routes>
-    </>
+  </Suspense>
+</>
   )
 }
 
