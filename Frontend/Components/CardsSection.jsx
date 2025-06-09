@@ -23,34 +23,22 @@ const cardDetails = [
 
 const CardsSection = () => {
   return (
-  <section className=" pt-[1rem] relative bg-black">
-     {/* 🎨 Decorative Background Circles */}
-     <div className="absolute inset-0 -z-10">
-        <div className="absolute w-60 h-60 bg-black rounded-full opacity-20 blur-3xl top-20 left-10"></div>
-        <div className="absolute w-80 h-80 bg-black rounded-full opacity-20 blur-3xl top-[30%] right-10"></div>
-        <div className="absolute w-52 h-52 bg-yellow-300 rounded-full opacity-20 blur-3xl bottom-0 right-[25%]"></div>
-        <div className="absolute w-72 h-72 bg-yellow-400 rounded-full opacity-20 blur-3xl top-[60%] left-[45%]"></div>
-
-        <div className="absolute w-60 h-60 bg-black rounded-full opacity-20 blur-3xl top-20 left-60"></div>
-        <div className="absolute w-80 h-80 bg-yellow-300 rounded-full opacity-20 blur-3xl top-[30%] right-30"></div>
-        <div className="absolute w-52 h-52 bg-black rounded-full opacity-20 blur-3xl bottom-0 right-[55%]"></div>
-        <div className="absolute w-72 h-72 bg-black rounded-full opacity-20 blur-3xl top-[60%] left-[85%]"></div>
-      </div>
-
-
-      <h2 className="text-5xl text-white p-5 text-center libre-baskerville-bold  mb-16 bg-black">IDEA-TEST-BUILD</h2>
-       <div className="py-20 mb-16 flex flex-col justify-center items-center gap-36 ">
-      {
-        cardDetails.map((item, index) => {
-          return (
-            <div   className={`${ index === 1 ? 'mr-[-10rem] rounded-[3rem] ' : 'ml-[-10rem]'}`} key={index}>
-              <Card item={item} index={index} />
-            </div>
-          )
-        })
-      }
+    <section className=" relative bg-black">
+    <h2 className="text-3xl md:text-5xl text-white px-4 py-2 text-center libre-baskerville-bold mb-12 md:mb-16">
+      IDEA-TEST-BUILD
+    </h2>
+  
+    <div className="py-10 md:py-20 mb-10 md:mb-16 flex flex-col justify-center items-center gap-16 md:gap-36">
+      {cardDetails.map((item, index) => (
+        <div
+          key={index}
+          className={` px-4 sm:px-6 md:px-0} `}>
+          <Card item={item} index={index} />
+        </div>
+      ))}
     </div>
-  </section>  
+  </section>
+  
   )
 }
 

@@ -45,7 +45,7 @@ const handleLogout = async ()=>{
 }  
 
   return userState ?(
-    <div className={`flex flex-col justify-center items-center gap-2 w-24 p-4 absolute right-10 top-4 `} onClick={() => setIsOpen(true)} onMouseEnter={() => setIsOpen(true)}  onMouseLeave={() => setIsOpen(false)}>
+    <div className={`flex flex-col justify-center items-center gap-2 w-[30%] p-4 `} onClick={() => setIsOpen(true)} onMouseEnter={() => setIsOpen(true)}  onMouseLeave={() => setIsOpen(false)}>
       <button className="flex justify-center items-center gap-2">
           <span className=""><FaUser className="text-white bg-black size-8 border rounded-full p-1 border-gray-300"/></span>
           <span >
@@ -72,7 +72,7 @@ const handleLogout = async ()=>{
     </div>
   ):(
     <Link to={'/login-signup'}>
-         <button className=" libre-baskerville-bold text-lg text-white  px-4 py-2 rounded-md bg-black">Login / Sign Up</button>
+         <button className=" w-[9rem] sm:w-[10rem] h-12 libre-baskerville-bold text-base sm:text-lg  text-white  px-4 py-1 rounded-md bg-black">Login / Sign Up</button>
     </Link>
   )
 }

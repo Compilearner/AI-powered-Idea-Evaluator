@@ -1,24 +1,8 @@
-// import React from 'react'
-
-// const Card = ({item}) => {
-//   return (
-// <div className="relative w-[80vw] h-[50vh]  border-gray-500 border rounded-[3rem] flex items-center p-10 gap-24 overflow-hidden shadow-lg " >
-//     <div className='w-2/5 h-4/5'>
-//         <img src={item.src} alt={item.alt} className='object-cover w-full h-full ' />
-//     </div>
-//     <div className=' w-2/4 flex flex-col gap-10' >
-//          <h2 className='roboto-semibold text-4xl '>{item.title}</h2>
-//          <p className='libre-baskerville-regular text-gray-500 text-lg'>{item.description}</p>
-//     </div>
-// </div>
-//   )
-// }
-
-// export default Card
 
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,7 +25,8 @@ const Card = ({ item, index }) => {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: cardRef.current,
-          start: 'top 80%',
+          start: 'top bottom',
+          end: 'bottom top',
           toggleActions: 'restart none none none', // animate on every scroll-in
         },
       }
@@ -49,25 +34,29 @@ const Card = ({ item, index }) => {
   }, [index]);
 
   return (
-    <div
-      ref={cardRef}
-      className="relative w-[80vw] h-[50vh] rounded-[3rem] flex items-center p-10 gap-24 overflow-hidden border border-gray-100 "
-    >
-      <div className="w-2/5 h-4/5">
-        <img src={item.src} alt={item.alt} className="object-cover w-full h-full" />
-      </div>
-      <div className="w-2/4 flex flex-col gap-10">
-        <h2 className="roboto-semibold text-white text-4xl">{item.title}</h2>
-        <p className="libre-baskerville-regular text-gray-500 text-lg">{item.description}</p>
-      </div>
-    </div>
+<div
+   ref={cardRef}
+  className="relative w-[80vw] max-w-6xl tallest:h-[35vh] h-auto md:h-[50vh] rounded-3xl flex flex-col md:flex-row items-center p-6 md:p-10 gap-10 md:gap-24 overflow-hidden border border-gray-100">
+  {/* Image Container */}
+  <div className="w-full md:w-2/5 h-64 md:h-4/5">
+    <img
+      src={item.src}
+      alt={item.alt}
+      className="object-cover w-full h-full rounded-2xl"
+    />
+  </div>
+
+  {/* Text Container */}
+  <div className="w-full md:w-2/4 flex flex-col gap-4 md:gap-10 text-center md:text-left">
+    <h2 className="roboto-semibold text-white text-lg  sm:text-xl md:text-2xl">{item.title}</h2>
+    <p className="libre-baskerville-regular text-gray-500 text-base md:text-lg">
+      {item.description}
+    </p>
+  </div>
+</div>
   );
 };
 
 export default Card;
-
-
-
-
 
 

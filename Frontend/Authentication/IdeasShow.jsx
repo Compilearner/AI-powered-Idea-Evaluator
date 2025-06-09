@@ -41,8 +41,8 @@ useEffect(()=>{
   return (
     <>
      {/** Idea History Container */}
-        <div className="w-full h-fit  flex flex-col justify-center items-center     rounded-xl py-6 ">
-        <h2 className="roboto-semibold text-3xl text-center text-white p-4 w-full mb-4">IDEAS HISTORY</h2>
+        <div className="w-full min-h-fit h-full  flex flex-col justify-center items-center     rounded-xl py-6 ">
+        <h2 className="roboto-semibold text-3xl text-center  p-4 w-full mb-4 max-sm:text-2xl">IDEAS HISTORY</h2>
            { ideas.length > 0 &&
              ideas.slice(0,visibleCount).map((idea, idx)=>{
               return (
@@ -51,8 +51,8 @@ useEffect(()=>{
                   <button className='absolute top-2 -right-3 border-none w-10  ' onClick={()=>handleDeleteIdea(idea._id)}><FaTimes className='text-lg text-red-600'/></button>
                     
 
-                   <span className='absolute top-1 left-2 libre-baskerville-bold text-green-700'>({idx+1})</span> 
-                  <p className="roboto-normal text-white text-lg p-4"> {idea.description}</p>
+                  <span className='absolute top-1 left-2 libre-baskerville-bold '>({idx+1})</span> 
+                  <p className="roboto-normal  text-lg p-4 max-sm:text-[1rem] max-sm:text-justify"> {idea.description}</p>
                 </div>
               )
              }) 

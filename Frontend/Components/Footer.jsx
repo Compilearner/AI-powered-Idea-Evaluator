@@ -8,13 +8,13 @@ const year = new Date().getFullYear();
     <footer className="w-full h-10 p-2 bg-gray-600">
         <div className="flex justify-center items-center gap-3">
             <div className="flex justify-center items-center gap-2"> 
-               <p className="text-lg  text-white libre-baskerville-regular">Copyright</p>
+               <p className="text-base sm:text-lg   text-white libre-baskerville-regular">Copyright</p>
                <span className="text-white flex justify-center items-center gap-2">
                 <FaCopyright className="self-center"/>
-                <p className="text-lg  text-white libre-baskerville-regular">{year},</p>
+                <p className="text-base sm:text-lg  text-white libre-baskerville-regular">{year},</p>
                 </span>
             </div>
-            <p className="text-lg  text-white libre-baskerville-regular"> 
+            <p className="text-base sm:text-lg text-white libre-baskerville-regular"> 
             All rights reserved.
             </p>
         </div>
@@ -22,4 +22,4 @@ const year = new Date().getFullYear();
   )
 }
 
-export default Footer
+export default Footer;
