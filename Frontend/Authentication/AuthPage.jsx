@@ -117,7 +117,7 @@ const AuthPage = () => {
   return (
   <div className="h-screen w-full bg-black flex justify-center gap-[11rem] md:gap-[8rem] items-center max-lg:gap-0  " >
     <div className="w-1/2 h-screen hidden min-lg:inline-block ">
-        <img src={"/Images/person.jpg"} className="object-cover h-full "/>
+        <img src={"/Images/person.webp"} className="object-cover h-full "/>
     </div>
      <div  className=" lg:w-[37vw] min-h-fit tall:h-[50vh] short:h-[70vh] xl:w-[35%] max-lg:w-[52%] md:w-[45%] bg-transparent border min-lg:mr-32 border-slate-300 rounded-lg z-[100]  flex flex-col justify-center items-center gap-[2rem] tall:gap-14 relative p-[1rem]  max-small:w-[80%] "> 
          <div className="border border-white bg-white p-[1.5rem] rounded-full size-[5rem] absolute top-[-2.5rem]">

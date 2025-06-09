@@ -4,19 +4,19 @@ const cardDetails = [
   {
     title: "Skill & Purpose based testing",
     description: "Feedback based on your experience level and the purpose of your idea—whether you're building for your resume, a hackathon, or academic research.",
-    src: "/Images/purpose.jpg",
+    src: "/Images/purpose.webp",
     alt:"purpose labeling with bulb",
   },
   {
     title: "Ideas Scoring System",
     description: "Get a instant score for your idea across key metrics like uniqueness, impact, and skill.",
-    src: "/Images/evaluatie-score.png",
+    src: "/Images/evaluatie-score.webp",
     alt:"Evaluation Score meter",
   },
   {
     title: "Ideas Store",
     description: "Capture and organize your project ideas in one place. Easily save, and revisit them whenever inspiration strikes.",
-    src: "/Images/store.jpg",
+    src: "/Images/store.webp",
     alt:"Notes of idea in book",
   }
 ];

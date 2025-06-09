@@ -48,7 +48,7 @@ const Feedback = () => {
       <h2 className='libre-baskerville-bold  text-lg sm:text-2xl md:text-4xl text-white text-center p-4 bg-black w-screen'>GIVE US YOUR VALUABLE FEEDBACK</h2>
       <div className=' w-[80%] max500:w-[100%] flex flex-col md:flex-row justify-center items-center gap-6  md:rounded-[3rem] min500:shadow-xl min500:border border-gray-500  min500:px-4 '>
         <div className='hidden min500:inline w-[60%] md:w-2/5 h-[50%] md:h-[75%] '>
-          <img src='/Images/feedback.png' alt='feedback box illustration' className='object-cover w-full h-full' />
+          <img src='/Images/feedback.webp' alt='feedback box illustration' className='object-cover w-full h-full' />
         </div>
         <div className=' w-full md:w-[45vw] bg-transparent h-[35vh] rounded-lg outline-1   '>
           <form onSubmit={handleSubmit(onSubmit)} className=' p-6  flex justify-center gap-6 flex-col w-full '>

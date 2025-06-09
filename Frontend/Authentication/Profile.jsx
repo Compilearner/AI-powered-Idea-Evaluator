@@ -15,7 +15,7 @@ const {user} = useAuthStore((state)=> state);
       <div className="relative w-full h-[50vh] flex justify-center items-center bg-black border-b border-gray-400 max-sm:px-6">
         {/* Background image with black overlay */}
        <div className="absolute inset-0">
-          <div className="w-[50vw] mx-auto h-full bg-[url('/Images/purpose.jpg')] bg-cover bg-center max-sm:w-full min-w-[40vw]">
+          <div className="w-[50vw] mx-auto h-full bg-[url('/Images/purpose.webp')] bg-cover bg-center max-sm:w-full min-w-[40vw]">
           <div className="w-full h-full bg-black/80 "></div>
        </div>
       </div>

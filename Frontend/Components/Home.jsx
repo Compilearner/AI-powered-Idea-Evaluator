@@ -27,7 +27,7 @@ const {user} = useAuthStore((state)=>state);
               </Link>
           </div>
           <div className="w-4/5  lg:w-[40%] xl:w-[33%] h-auto rounded-t-full rounded-b-full pt-12 sm:p-6 xl:mr-12 ">
-              <img src={"/Images/idea_01.jpg"} alt="Person thinking an Idea" className="object-cover w-full" />
+              <img src={"/Images/idea_01.webp"} alt="Person thinking an Idea" className="object-cover w-full" />
           </div>
         </div>
         <CardsSection/>
