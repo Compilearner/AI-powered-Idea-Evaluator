@@ -10,6 +10,7 @@ This tool helps users decide whether to pursue or skip a project idea by evaluat
 ## Features  
 - AI Feedback on Idea or related input
 - Manage and store user's ideas securely
+- Avoid duplicate ideas saving per user 
 - Token-based Authentication
 - Responsive Design across different screen-sizes
 
