@@ -27,7 +27,8 @@ This tool helps users decide whether to pursue or skip a project idea by evaluat
 
 | Stored ideas in user profile | AI Response |
 |----------------|-----------------|
-|![Idea Store)](https://github.com/user-attachments/assets/881c0ab4-ccfc-4bdb-af19-e5def13a1fa4) |![AI Response)](https://github.com/user-attachments/assets/7b22cff9-c98b-406e-b777-35183d5f0c89)|
+|![Idea Store)](https://github.com/user-attachments/assets/881c0ab4-ccfc-4bdb-af19-e5def13a1fa4) |![AI Response)](https://github.com/user-attachments/assets/12cbd0ea-51db-4ae6-8cd6-da32b67f9675)
+|
 
 ---
 
