@@ -6,7 +6,6 @@ import {toast} from "react-hot-toast"
 
 
 const UserButton = () => {
-// const currentUser = true;
 
 const [isOpen , setIsOpen] = useState(false);
 const navigate = useNavigate();
@@ -30,10 +29,7 @@ const handleLogout = async ()=>{
     if(res.success){
         toast.success(res.message);
     
-          {/** TAKE SOME TIME TO SHOW UP FOR TOAST BEFORE NAVIGATING */}
-          setTimeout(()=>{
           navigate("/");
-        },2000);
         
         }else{
           toast.error(res.message);

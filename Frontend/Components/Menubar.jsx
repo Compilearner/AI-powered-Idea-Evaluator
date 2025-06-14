@@ -22,7 +22,7 @@ const Menubar = () => {
 
        {
         isMenuOpen && (
-          <div className=" flex flex-col justify-center bg-white items-center gap-2 min-w-fit min-h-fit shadow-md rounded-md  absolute z-50 top-10 p-6">
+          <div className=" flex flex-col justify-center bg-white items-center gap-2 min-w-fit w-32 min-h-fit shadow-md rounded-md absolute z-50 top-10 p-4 md:p-6">
           {navItems.map((Item, index) => (
               <Link key={index} to={Item.to} className="mx-2 text-base sm:text-lg md:text-lg xl:text-xl font-semibold libre-baskerville-bold hover:underline decoration-slate-400 underline-offset-4">
                  { (user && Item.item === "Get Started") ? "Playground" :  Item.item}

@@ -22,32 +22,33 @@ const prompt = `
 You are an AI idea evaluator.
 
 Your task is to evaluate a user's idea based on their experience level and the purpose behind working on idea (learning, portfolio, resume, etc.).
-
-Respond in the following **JSON structured format**, adapting it naturally to the input:
-
-
- EvaluationSummary = {
-  ExperienceLevel: {
-    title: Experience Level(${skillLevel}),
-    rating: "x/10",
-    feedback: "[Describe how well the idea fits their current skills. Be encouraging but realistic.]"
+Ideas could be about building a software(Web Apps, AI Agents, Mobile Apps, Operating System, Compilers, or any software program), Hardware(CPU, Circuit, Computer, OR Any electronic device), so evaluate them effectively.
+ 
+Respond the evaluation in the following JSON structured format, adapting it naturally to the input
+{
+ "EvaluationSummary":{
+  "ExperienceLevel": {
+    "title": Experience Level (${skillLevel}),
+    "rating": "x/10",
+    "feedback": "[Describe how well the idea fits their current skills. Be encouraging but realistic.]"
   },
-  Purpose: {
-    title: Purpose(${purpose}),
-    rating: "x/10",
-    feedback: "[Describe how helpful the idea is for their goal. Adjust tone for learning vs resume vs hackathon.]"
+  "Purpose": {
+    "title": Purpose (${purpose}),
+    "rating": "x/10",
+    "feedback": "[Describe how helpful the idea is for their goal. Adjust tone for learning vs resume vs hackathon.]"
   },
-  Recommendations: {
-    steps: [
+  "Recommendations": {
+    "steps": [
       "Step 1: [Beginner → tutorials or basic projects | Intermediate → tools or datasets | Advanced → architecture or risk analysis]",
       "Step 2: ...",
       "Step 3: ..."
     ]
   },
-  OverallFeedback: {
-    feedback: "[Wrap up positively.]"
+  "OverallFeedback": {
+    "feedback": "[Wrap up positively.]"
   }
-};
+ }
+}  
 
 
 If the input is not an idea (like a question, general query or story), 
@@ -92,10 +93,6 @@ try {
   }
 
    parsedReply = JSON.parse(cleanedReply);
-
-  //  if(!parsedReply.EvaluationSummary){
-  //   return res.status(200).json({success: true, evaluation: "Sorry, I can only evaluate ideas or project-based proposals, not general queries and other invalid input."});
-  //  }
 
   // Save only valid ideas
   const newIdea = await Idea.create({

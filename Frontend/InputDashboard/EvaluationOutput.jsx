@@ -25,8 +25,8 @@ const EvaluationOutput = ({ output, setResponse , setIsLoading, error, setError 
     </div>
   </div>
 ) : output.ExperienceLevel != null ? (
-  <div className={`w-full sm:w-11/12 md:w-5/6 lg:w-[90%] max-h-fit relative bg-white py-6 px-4 sm:px-6 md:px-10 lg:px-12 rounded-md shadow-md space-y-4 opacity-0 ${output.ExperienceLevel ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}`}>
-    <h1 className='libre-baskerville-regular text-xl sm:text-2xl md:text-3xl text-black text-center bg-white'>Here is your Response</h1>
+  <div className={`w-full sm:w-11/12 md:w-5/6 lg:w-[90%] max-h-fit relative bg-white py-10 px-4 sm:px-6 md:px-10 lg:px-12 rounded-md shadow-md shadow-gray-500 space-y-4 opacity-0 ${output.ExperienceLevel ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}`}>
+    {/* <h1 className='libre-baskerville-regular text-xl sm:text-xl md:text-2xl text-black text-center bg-white'>Here is your Response</h1> */}
 
     {/* Close button */}
     <span className='absolute right-2 top-2'>
@@ -38,14 +38,14 @@ const EvaluationOutput = ({ output, setResponse , setIsLoading, error, setError 
     {/* Experience Level */}
     <div>
       <h2 className='libre-baskerville-regular text-lg sm:text-xl md:text-2xl text-black'>{output.ExperienceLevel.title}</h2>
-      <p className='roboto-normal text-gray-700 text-sm sm:text-base md:text-lg'><strong>Rating: </strong>{output.ExperienceLevel.rating}</p>
+      <p className='roboto-normal text-blue-700 text-sm sm:text-base md:text-lg'><strong>Rating: </strong>{output.ExperienceLevel.rating}</p>
       <p className='roboto-normal text-gray-700 text-sm sm:text-base md:text-lg'><strong>Evaluation: </strong>{output.ExperienceLevel.feedback}</p>
     </div>
 
     {/* Purpose */}
     <div>
       <h2 className='libre-baskerville-regular text-lg sm:text-xl md:text-2xl text-black'>{output.Purpose.title}</h2>
-      <p className='roboto-normal text-gray-700 text-sm sm:text-base md:text-lg'><strong>Rating: </strong>{output.Purpose.rating}</p>
+      <p className='roboto-normal text-blue-700 text-sm sm:text-base md:text-lg'><strong>Rating: </strong>{output.Purpose.rating}</p>
       <p className='roboto-normal text-gray-700 text-sm sm:text-base md:text-lg'><strong>Evaluation: </strong>{output.Purpose.feedback}</p>
     </div>
 
@@ -59,8 +59,8 @@ const EvaluationOutput = ({ output, setResponse , setIsLoading, error, setError 
 
     {/* Final Evaluation */}
     <div>
-      <h2 className='libre-baskerville-regular text-lg sm:text-xl md:text-2xl text-black'>Final Evaluation:</h2>
-      <p className='text-sm sm:text-base md:text-lg'>{output.OverallFeedback.feedback}</p>
+      <h2 className='libre-baskerville-bold text-lg sm:text-xl md:text-2xl text-gray-700'>Final Evaluation:</h2>
+      <p className='text-sm text-blue-700 sm:text-base md:text-lg'>{output.OverallFeedback.feedback}</p>
     </div>
   </div>
 ) : (

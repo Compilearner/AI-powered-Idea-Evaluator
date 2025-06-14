@@ -25,7 +25,7 @@ const {user} = useAuthStore((state)=> state);
         <span>
            <FaUser className="w-24 h-24 p-3 bg-white rounded-full" />
         </span>
-       <h2 className="text-[1.8rem]  text-white roboto-normal max-sm:text-[1.5rem]">{user.userName}</h2>
+       <h2 className="text-[1.8rem]  text-white roboto-normal max-sm:text-[1.5rem]">{user.userName || ""}</h2>
        </div>
       </div>
     <IdeasShow/>   

@@ -14,9 +14,6 @@ const PORT = process.env.PORT || 5000;
 //Middlware
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors()); // Allow all origins
-
-
 
 // Enable compression for all responses
 app.use(compression());

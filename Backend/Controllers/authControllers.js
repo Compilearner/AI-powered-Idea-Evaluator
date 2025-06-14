@@ -2,7 +2,6 @@ import User from "../Models/userSchema.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
-import cookieParser from 'cookie-parser';
 import Feed from "../Models/feedSchema.js";
 
 

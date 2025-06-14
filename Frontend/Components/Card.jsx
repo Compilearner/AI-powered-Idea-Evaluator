@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -43,6 +42,7 @@ const Card = ({ item, index }) => {
       src={item.src}
       alt={item.alt}
       className="object-cover w-full h-full rounded-2xl"
+      loading='lazy'
     />
   </div>
 

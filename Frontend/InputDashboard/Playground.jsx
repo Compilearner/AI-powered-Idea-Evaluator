@@ -47,7 +47,7 @@ const onSubmit = async (data) => {
   return token? (
     <section>
     <section className='py-4 px-4 sm:px-6 md:px-10 mb-12 mt-28'>
-      <div className='rounded-lg min-h-fit py-8 px-8 bg-gray-200 flex flex-col justify-center gap-20'>
+      <div className='rounded-lg min-h-fit py-8 px-8 bg-white flex flex-col justify-center gap-20'>
   
         <div className='flex flex-col justify-center gap-32'>
   
@@ -55,20 +55,19 @@ const onSubmit = async (data) => {
           <div className='flex flex-col justify-center items-center gap-2 bg-transparent w-full sm:w-4/5 md:w-3/5 mx-auto rounded-lg p-4'>
             <div className='flex text-gray-600 justify-center gap-2'>
               <span className='self-center'><FaHandPaper className='text-2xl sm:text-3xl text-black' /></span>
-              <h2 className='libre-baskerville-bold text-[1.2rem] sm:text-2xl  md:text-3xl text-gray-600'>Hi, Creative Thinker</h2>
+              <h2 className='libre-baskerville-bold text-[1.2rem] sm:text-2xl  md:text-4xl text-gray-600'>Hi, Creative Thinker</h2>
             </div>
-            <h2 className='libre-baskerville-bold text-sm sm:text-base md:text-2xl text-center text-black -mt-2'>Welcome to the Idea Playground</h2>
           </div>
   
           {/* Input */}
           <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-center items-center gap-6'>
   
             {/* Input Idea */}
-            <div className='w-full sm:w-4/5 md:w-3/5 shadow-md shadow-gray-400 rounded-md'>
+            <div className='w-full sm:w-4/5 md:w-3/5  rounded-md'>
               <textarea
-                className='w-full rounded-md px-3 py-2 text-base sm:text-lg md:text-xl focus:outline-none libre-baskerville-regular'
+                className='w-full rounded-md px-3 py-2 text-base sm:text-lg md:text-xl bg-gray-300 focus:outline-none libre-baskerville-regular'
                 {...register('idea', { required: true })}
-                placeholder='Describe your idea....'
+                placeholder='For example: I want to build a gym app from scratch'
                 rows={4}
                 required
               />
@@ -80,7 +79,7 @@ const onSubmit = async (data) => {
               {/* Purpose */}
               <div className='w-full sm:w-1/2 flex flex-col justify-center'>
                 <select
-                  className='rounded-md p-3 sm:p-4 text-sm sm:text-base focus:outline-none shadow-md shadow-gray-400'
+                  className='rounded-md p-3 sm:p-4 text-sm sm:text-base focus:outline-none bg-gray-300'
                   {...register('purpose', { required: true })}
                   required
                 >
@@ -96,7 +95,7 @@ const onSubmit = async (data) => {
               {/* Skill Level */}
               <div className='w-full sm:w-1/2 flex justify-start items-center'>
                 <select
-                  className='rounded-md p-3 sm:p-4 text-sm sm:text-base focus:outline-none w-full shadow-md shadow-gray-400'
+                  className='rounded-md p-3 sm:p-4 text-sm sm:text-base focus:outline-none w-full bg-gray-300'
                   {...register('skillLevel', { required: true })}
                   required
                 >
@@ -114,7 +113,7 @@ const onSubmit = async (data) => {
               <button
                 onClick={handleReset}
                 type='button'
-                className='text-base sm:text-lg w-full sm:w-2/5 md:w-[35%] h-10 rounded-md px-2 bg-black text-gray-400 libre-baskerville-bold hover:bg-gray-600 transition-all ease-in-out duration-300'
+                className='text-base sm:text-lg w-full sm:w-2/5 md:w-[35%] h-10 rounded-md px-2 bg-black text-white libre-baskerville-bold hover:bg-gray-600 transition-all ease-in-out duration-300'
               >
                 Reset Input
               </button>
@@ -131,9 +130,12 @@ const onSubmit = async (data) => {
   
         {/* Response Container */}
         {isLoading && (
-          <div className='bg-black flex justify-center items-center py-12 px-2'>
+          <div className='bg-transparent rounded-md flex justify-center items-center py-12 px-2'>
             {isLoadingSpin ? (
-              <div className="animate-spin h-8 w-8 border-4 border-white border-t-transparent rounded-full"></div>
+              <div className='flex justify-center items-center gap-2'>
+                 <div className="animate-spin h-8 w-8 border-4 border-gray-500 border-t-transparent rounded-full"></div>
+                 <h2 className='roboto-normal text-xl'>Evaluating...</h2>
+              </div>
             ) : (
               <EvaluationOutput
                 output={response}

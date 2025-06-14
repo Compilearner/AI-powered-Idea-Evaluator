@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuthStore } from '../Store/authStore';
 import { FaTimes } from 'react-icons/fa';
 import {toast} from 'react-hot-toast';
@@ -41,7 +41,7 @@ useEffect(()=>{
   return (
     <>
      {/** Idea History Container */}
-        <div className="w-full min-h-fit h-full  flex flex-col justify-center items-center     rounded-xl py-6 ">
+        <div className="w-full min-h-fit h-full  flex flex-col justify-center items-center rounded-xl py-6 ">
         <h2 className="roboto-semibold text-3xl text-center  p-4 w-full mb-4 max-sm:text-2xl">IDEAS HISTORY</h2>
            { ideas.length > 0 &&
              ideas.slice(0,visibleCount).map((idea, idx)=>{
@@ -66,7 +66,7 @@ useEffect(()=>{
            { /** No Ideas Exist */}
            {
               !ideas.length && (
-                <p className='libre-baskerville-regular  text-xl text-center text-red-600'>No Ideas Yet.....</p>
+                <p className='libre-baskerville-regular  text-xl text-center text-gray-400'>No Ideas Yet.....</p>
               )
            }
         </div>

@@ -6,8 +6,9 @@ import Navbar from '../Components/Navbar';
 import gsap from 'gsap';
 import { useWindowScroll } from 'react-use';
 import UserButton from '../Components/UserButton';
-import { lazy, Suspense } from 'react';
 import Home from '../Components/Home';
+import { Profile } from '../Authentication/Profile';
+import Playground from '../InputDashboard/Playground';
 
 
 const App = () => {
@@ -60,9 +61,6 @@ const {autoLogin} = useAuthStore((state)=>state);
   },[isNavVisible]);  
 
 
-  const Playground = lazy(()=>import('../InputDashboard/Playground'));
-  const Profile = lazy(()=>import('../Authentication/Profile'));
-
   return (
 <>
     {
@@ -73,14 +71,14 @@ const {autoLogin} = useAuthStore((state)=>state);
         </header>
       )
      }
-  <Suspense fallback={<h1 className='text-xl text-center libre-baskerville-bold mt-12'>Loading.....</h1>}>
+
     <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login-signup' element={<AuthPage/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/playground' element={<Playground/>}/>
     </Routes>
-  </Suspense>
+
 </>
   )
 }
