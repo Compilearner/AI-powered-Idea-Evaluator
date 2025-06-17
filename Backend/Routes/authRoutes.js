@@ -11,7 +11,7 @@ router.post("/loginUser", loginUser );
 
 router.post("/logoutUser", verifyToken, logoutUser );
 
-router.post("/autoCheck", verifyToken, (req,res)=>{
+router.get("/autoCheck", verifyToken, (req,res)=>{
     return res.status(201).json({success:true, user:req.user});
 })
 

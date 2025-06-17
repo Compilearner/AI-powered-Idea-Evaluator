@@ -24,7 +24,7 @@ export const registerUser = async(req, res)=>{
     const token = jwt.sign({userId:newUser._id}, process.env.TOKEN_KEY, {expiresIn: "1d"});
     res.cookie("token", token, {
         httpOnly:true,
-        // secure: 
+        secure: process.env.NODE_ENV === "production",
     });
 
     return res.status(200).json({success : true, message:"User registered Successfully",newUser});
@@ -55,7 +55,7 @@ export const loginUser = async(req, res)=>{
     const token = jwt.sign({userId:user._id, userName: user.userName}, process.env.TOKEN_KEY, {expiresIn:"1d"});
     res.cookie("token", token, {
         httpOnly:true,
-        secure: process.env.NODE_ENV === "production" 
+        secure: process.env.NODE_ENV === "production", 
     });
 
     return res.status(200).json({success:true, message:"User Login Successfully", user});
@@ -69,6 +69,7 @@ export const loginUser = async(req, res)=>{
 export const logoutUser = async (req, res)=>{
     res.clearCookie("token",{
         httpOnly:true,
+        secure: process.env.NODE_ENV === "production",
     })
 
     return res.status(200).json({success:true, message: "Logout Successfully"});

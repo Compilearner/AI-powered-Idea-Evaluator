@@ -90,7 +90,7 @@ export const useAuthStore = create(
             autoLogin : async ()=>{
                 try{
                      const res = await fetch("/api/autoCheck", {
-                        method:"POST",
+                        method:"GET",
                         credentials : "include",
                      })
 
