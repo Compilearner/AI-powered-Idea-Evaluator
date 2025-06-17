@@ -2,7 +2,9 @@
   "name": "project-2",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon Backend/server.js"
+    "dev": "NODE_ENV=development nodemon Backend/server.js",
+    "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend",
+    "start": "NODE_ENV=production node Backend/server.js"
   },
   "type": "module",
   "keywords": [],
