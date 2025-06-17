@@ -25,8 +25,7 @@ const EvaluationOutput = ({ output, setResponse , setIsLoading, error, setError 
     </div>
   </div>
 ) : output.ExperienceLevel != null ? (
-  <div className={`w-full sm:w-11/12 md:w-5/6 lg:w-[90%] max-h-fit relative bg-white py-10 px-4 sm:px-6 md:px-10 lg:px-12 rounded-md shadow-md shadow-gray-500 space-y-4 opacity-0 ${output.ExperienceLevel ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}`}>
-    {/* <h1 className='libre-baskerville-regular text-xl sm:text-xl md:text-2xl text-black text-center bg-white'>Here is your Response</h1> */}
+  <div className={`w-full sm:w-11/12 md:w-5/6 lg:w-[90%] max-h-fit flex flex-col justify-center items-center gap-9 relative bg-white py-10 px-4 sm:px-6 md:px-10 lg:px-12 rounded-md shadow-md shadow-gray-500 space-y-4 opacity-0 ${output.ExperienceLevel ? "opacity-100 transition-opacity duration-700 ease-linear" : ""}`}>
 
     {/* Close button */}
     <span className='absolute right-2 top-2'>

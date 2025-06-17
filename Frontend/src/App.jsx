@@ -19,7 +19,7 @@ const {autoLogin} = useAuthStore((state)=>state);
         const check = async ()=>{
             const res = await autoLogin();
 
-            console.log(res);
+            // console.log(res);
         }
 
         check();

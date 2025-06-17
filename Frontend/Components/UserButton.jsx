@@ -13,7 +13,7 @@ const { logout, user } = useAuthStore();
 const [userState, setUserState] = useState(user);
 
 useEffect(() => {
-    console.log(user);  // This will log the user state whenever it changes
+    // console.log(user);  // This will log the user state whenever it changes
     setUserState(user);
 }, [user]);
 
@@ -23,8 +23,8 @@ const handleLogout = async ()=>{
     try{
     const res = await logout();
 
-    console.log(res);
-    console.log(user);
+    // console.log(res);
+    // console.log(user);
 
     if(res.success){
         toast.success(res.message);

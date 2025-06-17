@@ -51,7 +51,7 @@ Respond the evaluation in the following JSON structured format, adapting it natu
 }  
 
 
-If the input is not an idea (like a question, general query or story), 
+If the input is not an idea (like a question, general query), 
 Only return this string exactly, with no extra explanation, code block, or label:
 
 Sorry, I can only evaluate ideas or project-based proposals, not general queries and other invalid input.

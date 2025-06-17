@@ -19,7 +19,7 @@ const {user, token, playground } = useAuthStore((state) => state);
 
 
 const onSubmit = async (data) => {
-    console.log('Form submitted:', data);
+    // console.log('Form submitted:', data);
     setIsLoading(true);
     setIsLoadingSpin(true);
 

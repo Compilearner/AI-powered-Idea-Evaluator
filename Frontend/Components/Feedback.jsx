@@ -51,7 +51,7 @@ const Feedback = () => {
           <form onSubmit={handleSubmit(onSubmit)} className=' p-6  flex justify-center gap-6 flex-col w-full '>
 
             <div className='w-full p-2 flex justify-center items-center'>
-              <textarea className='w-full bg-transparent p-2 libre-baskerville-bold border rounded-md text-base sm:text-lg  bg-gray-300 shadow-md' {...register('main', { required: true })} required placeholder='Is it helpful?, Please write your thougths here....' rows={3} />
+              <textarea className='w-full p-2 libre-baskerville-bold rounded-md text-base sm:text-lg bg-transparent shadow-md border-black border-[.4rem]' {...register('main', { required: true })} required placeholder='Is it helpful?, Please write your thougths here....' rows={3} />
             </div>
             <div className='w-full flex justify-center items-center'>
               <button type='submit' className='border-none px-4 py-1 w-36 bg-green-700 shadow-md text-white libre-baskerville-bold rounded-md text-base sm:text-lg md:text-xl'>Submit</button>

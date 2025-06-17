@@ -201,7 +201,7 @@ export const useAuthStore = create(
                       
 
                    }catch(err){
-                      console.log(err);
+                    //   console.log(err);
                       return {success :false, message:err.message};
                       
                    }
